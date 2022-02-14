@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <HotGame />
+    <transition name="login">
+      <div v-if="singin.status">
+        <Singin />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  setup() {
+    const store = useStore();
+    const singin = computed(() => store.getters["Component/GetSingin"]);
 
-@Options({
-  components: {
-    HelloWorld,
+    return { singin };
   },
-})
-export default class Home extends Vue {}
+});
 </script>
