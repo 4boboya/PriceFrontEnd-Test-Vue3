@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/styles/_login.scss";
+@import "@/styles/component/_login.scss";
 </style>
 
 <script lang="ts">

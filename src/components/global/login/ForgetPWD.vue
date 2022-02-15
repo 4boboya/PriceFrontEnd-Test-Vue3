@@ -21,7 +21,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/styles/_login.scss";
+@import "@/styles/component/_login.scss";
 .button-div span {
   cursor: default;
 }
