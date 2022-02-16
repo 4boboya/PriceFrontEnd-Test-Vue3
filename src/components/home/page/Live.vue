@@ -1,5 +1,5 @@
 <template>
-  <div class="live" ref="live-data">
+  <div class="live" :ref="el => { thisDoc = el }">
     <LiveCanvas v-if="Memo"/>
     <div>
       <div v-for="(item, LID) in liveDatas" :key="`oddtable_${LID}`">
@@ -119,10 +119,12 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, reactive } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, reactive, ref } from 'vue'
 import { useStore } from "vuex"
 import { IGameData } from "@/type/Live"
 import { liveData } from "@/config/Test"
+import mitt from "@/library/global/Mitt"
+import html2canvas from "html2canvas";
 export default defineComponent({
   components: {
     Odd: defineAsyncComponent(() => import("./Odd.vue")),
@@ -130,10 +132,24 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const thisDoc = ref<HTMLElement>();
     let Memo = computed(() => { return store.getters["Component/GetMemo"] });
     let liveDatas = reactive(liveData as IGameData)
 
-    return { Memo, liveDatas }
+    const save = () => {
+      if (thisDoc.value != undefined) {
+        html2canvas(thisDoc.value, {backgroundColor: '#0F1110'}).then((res: HTMLCanvasElement) => {
+          const dataURl = res.toDataURL("image/png")
+          console.log(dataURl)
+          store.dispatch("Component/SetMemo", false)
+        })
+      }
+    }
+
+    mitt.on("save", save)
+
+
+    return { thisDoc, Memo, liveDatas }
   }
 })
 </script>

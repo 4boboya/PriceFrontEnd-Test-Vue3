@@ -27,9 +27,9 @@ import { computed, defineComponent, defineAsyncComponent } from 'vue'
 import { useStore} from "vuex"
 export default defineComponent({
   components: {
-    ControlType: defineAsyncComponent(() => import("@/components/ui/home/ControlType.vue")),
-    ControlCanvas: defineAsyncComponent(() => import("@/components/ui/home/ControlCanvas.vue")),
-    ControlGameType: defineAsyncComponent(() => import("@/components/ui/home/ControlGameType.vue")),
+    ControlType: defineAsyncComponent(() => import("@/components/home/ui/ControlType.vue")),
+    ControlCanvas: defineAsyncComponent(() => import("@/components/home/ui/ControlCanvas.vue")),
+    ControlGameType: defineAsyncComponent(() => import("@/components/home/ui/ControlGameType.vue")),
   },
   setup() {
     const store = useStore();

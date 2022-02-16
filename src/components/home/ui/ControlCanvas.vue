@@ -82,11 +82,12 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref, inject, watch, toRef } from 'vue'
+import { defineComponent, computed, ref, inject, watch } from 'vue'
 import { useStore } from "vuex"
-import { UseEraserFunc, UsePenFunc, UseFontFunc, ClearCanvas, SaveCanvas, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
+import { UseEraserFunc, UsePenFunc, UseFontFunc, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
 import { TFunc, TInputFunc} from "@/type/Global"
 import { FontSize } from "@/config/application/Font"
+import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore();
@@ -101,8 +102,6 @@ export default defineComponent({
     const useFont = inject(UseFontFunc) as TFunc;
     const changeColor = inject(ChangeColorFunc) as TInputFunc<string>;
     const changeSize = inject(ChangeSizeFunc) as TInputFunc<number>;
-    const clear = inject(ClearCanvas) as TFunc;
-    const save = inject(SaveCanvas) as TFunc;
     let showSize = ref<boolean>(false);
     let showColor = ref<boolean>(false);
     let inputColor = ref(ref(color).value);
@@ -110,6 +109,14 @@ export default defineComponent({
     const setMemo = (status: boolean) => {
       store.dispatch("Component/SetMemo", status)
     };
+
+    const clear = () => {
+      mitt.emit('clear')
+    }
+
+    const save = () => {
+      mitt.emit('save')
+    }
 
     watch(
       () => { return inputColor.value },

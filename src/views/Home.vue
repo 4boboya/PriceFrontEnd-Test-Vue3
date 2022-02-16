@@ -65,11 +65,11 @@
 import { computed, defineComponent, defineAsyncComponent, ref, provide } from "vue";
 import { useStore } from "vuex";
 import { TFunc, TInputFunc } from "@/type/Global"
-import { UseEraserFunc, UsePenFunc, UseFontFunc, ClearCanvas, SaveCanvas, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
+import { UseEraserFunc, UsePenFunc, UseFontFunc, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
 export default defineComponent({
   components: {
-    ControlBar: defineAsyncComponent(() => import("@/components/ui/home/ControlBar.vue")),
-    Live: defineAsyncComponent(() => import("@/components/page/home/Live.vue")),
+    ControlBar: defineAsyncComponent(() => import("@/components/home/ui/ControlBar.vue")),
+    Live: defineAsyncComponent(() => import("@/components/home/page/Live.vue")),
   },
   setup() {
     const store = useStore();
@@ -115,15 +115,6 @@ export default defineComponent({
     provide("size", size)
     provide(ChangeColorFunc, changeColor)
     provide(ChangeSizeFunc, changeSize)
-
-    const clear: TFunc = () => {
-      console.log("clear")
-    }
-    const save: TFunc = () => {
-      console.log("save")
-    }
-    provide(ClearCanvas, clear)
-    provide(SaveCanvas, save)
 
     return { ISingin, Width };
   },

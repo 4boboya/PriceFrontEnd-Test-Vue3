@@ -1,7 +1,7 @@
-import Header from "./global/header/Header.vue"
+import Header from "./global/Header.vue"
 
-import HotGame from "./ui/hotGame/HotGame.vue"
-import ISingin from "./ui/login/index.vue"
+import HotGame from "./hotGame/HotGame.vue"
+import ISingin from "./login/index.vue"
 
 export default {
     Header,
