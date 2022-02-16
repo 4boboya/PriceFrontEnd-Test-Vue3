@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
+import { modules, TState } from "./modules"
 
-import modules from "./modules"
-
-export default createStore({
+export default createStore<TState>({
   modules
 })

@@ -1,9 +1,10 @@
 import Header from "./global/header/Header.vue"
-import Singin from "./global/login/index.vue"
-import HotGame from "./global/hotGame/HotGame.vue"
+
+import HotGame from "./ui/hotGame/HotGame.vue"
+import Singin from "./ui/login/index.vue"
 
 export default {
     Header,
-    Singin,
     HotGame,
+    Singin,
 }

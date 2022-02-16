@@ -45,12 +45,13 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex"
 import { HeaderControl } from "@/config/application/HeaderControl";
 export default defineComponent({
   setup() {
     const store = useStore()
+    const Status = computed(() => { return store.getters['User/Status']})
     let show = ref<boolean> (false);
     let currentControl = ref<string> ("");
 
@@ -70,7 +71,7 @@ export default defineComponent({
       store.dispatch("Component/SetSingin", {status: true, component: "Login"})
     };
 
-    return { HeaderControl, show, currentControl, openSubControl, login };
+    return { HeaderControl, Status, show, currentControl, openSubControl, login };
   },
 });
 </script>

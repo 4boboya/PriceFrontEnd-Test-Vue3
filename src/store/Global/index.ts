@@ -3,7 +3,7 @@ import { mutations } from "./mutations"
 import { actions } from "./actions"
 import { getters } from "./getters"
 
-const ComponentModule = {
+const GlobalModule = {
     namespaced: true,
     state,
     mutations,
@@ -11,6 +11,6 @@ const ComponentModule = {
     getters,
 }
 
-export type ComponentState = TState;
+export type GlobalState = TState;
 
-export default ComponentModule;
+export default GlobalModule;

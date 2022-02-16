@@ -5,24 +5,19 @@
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  setup() {
+    const store = useStore();
 
-#nav {
-  padding: 30px;
+    const setWidth = () => {
+      store.dispatch("Global/SetWidth", window.innerWidth)
+    };
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+    window.addEventListener("resize", setWidth);
+    setWidth();
+  },
+});
+</script>
