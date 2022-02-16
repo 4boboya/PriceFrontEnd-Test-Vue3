@@ -1,4 +1,8 @@
-export interface IDict {
+export interface IDict<T> {
+    [name: string]: T
+}
+
+export interface IStringDict {
     [name: string]: string
 }
 

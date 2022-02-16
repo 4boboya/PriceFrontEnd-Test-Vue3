@@ -1,11 +1,13 @@
 import Component, { ComponentState } from "./Component"
 import Global, { GlobalState } from "./Global"
-import IUser, { UserState } from "./User"
+import User, { UserState } from "./User"
+import Live, { LiveState } from "./Live"
 
-export type TState = ComponentState & GlobalState & UserState
+export type TState = ComponentState & GlobalState & UserState & LiveState
 
 export const modules = {
     Component,
     Global,
-    IUser
+    User,
+    Live
 }

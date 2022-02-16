@@ -119,10 +119,12 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, reactive, ref } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, reactive, ref, watch } from 'vue'
 import { useStore } from "vuex"
+import { LiveGame } from "@/api/home"
 import { IGameData } from "@/type/Live"
-import { liveData } from "@/config/Test"
+import { IStringDict } from "@/type/Global"
+import { tidyData } from "@/library/Live/ApiData"
 import mitt from "@/library/global/Mitt"
 import html2canvas from "html2canvas";
 export default defineComponent({
@@ -134,7 +136,17 @@ export default defineComponent({
     const store = useStore();
     const thisDoc = ref<HTMLElement>();
     let Memo = computed(() => { return store.getters["Component/GetMemo"] });
-    let liveDatas = reactive(liveData as IGameData)
+    let GameType = computed(() => { return store.getters["Global/GetGameType"] });
+    let liveDatas = computed(() => { return store.getters["Live/GetGameDatas"] });
+
+    const getLiveData = async () => {
+      await LiveGame({gameType: GameType.value}).then((res) => {
+        const { liveDatas, leagueMappintg, gameMappintg } = tidyData(res.gameLiveDtos) as { liveDatas: IGameData; leagueMappintg: IStringDict; gameMappintg: IStringDict }
+        store.dispatch("Live/SetGameDatas", liveDatas)
+        store.dispatch("Live/SetSiteLeagueMapping", leagueMappintg)
+        store.dispatch("Live/SetSiteGameMapping", gameMappintg)
+      })
+    }
 
     const save = () => {
       if (thisDoc.value != undefined) {
@@ -148,6 +160,12 @@ export default defineComponent({
 
     mitt.on("save", save)
 
+    getLiveData()
+
+    watch(
+      () => { return GameType.value },
+      () => { getLiveData() }
+    )
 
     return { thisDoc, Memo, liveDatas }
   }

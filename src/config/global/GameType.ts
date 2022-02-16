@@ -1,6 +1,6 @@
-import { IDict } from "@/type/Global"
+import { IStringDict } from "@/type/Global"
 
-export const GameTypes: IDict = {
+export const GameTypes: IStringDict = {
     "BK": "BasketBall",
     "SC": "Soccer",
     "BS": "BaseBall",

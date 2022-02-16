@@ -37,3 +37,64 @@ export interface IOdd {
 export interface IStatus {
     [name: string]: string
 }
+
+export interface IReqApiLiveGame {
+    gameType: string,
+}
+
+export interface IResApiLiveGame {
+    gameDate: string
+    gameID: string
+    gameStatus: string
+    gameTime: string
+    league: string
+    leagueID: string
+    liveUrl: string
+    score1: number
+    score2: number
+    team1: string
+    team1ID: string
+    team2: string
+    team2ID: string
+    siteGameDtos: Array<ISiteGameDtos>
+}
+
+export interface ISiteGameDtos {
+    gameDate: string
+    gameID: string
+    gameStatus: string
+    gameTime: string
+    league: string
+    leagueID: string
+    playByPlay: IPlayByPlay
+    requestTime: number
+    score1: number
+    score2: number
+    scores: number
+    site: string
+    team1: string
+    team1ID: string
+    team2: string
+    team2ID: string
+    odds: Array<ISiteOdds>
+}
+
+export interface IPlayByPlay {
+    [name: string]: any
+}
+
+export interface ISiteOdds {
+    playMode: string
+    prices: Array<ISitePrices>
+}
+
+export interface ISitePrices {
+    main: boolean
+    spread: string
+    odds: Array<ISiteOddInfo>
+}
+
+export interface ISiteOddInfo {
+    odd: number
+    oddType: string
+}
