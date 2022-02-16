@@ -14,9 +14,9 @@
         <span>|</span>
         <div>Promotions</div>
         <span>|</span>
-        <div @click="openSubControl('Feeback')">Feeback</div>
+        <div @click.stop="openSubControl('Feeback')">Feeback</div>
         <span>|</span>
-        <div @click="openSubControl('Customer')">Customer Services</div>
+        <div @click.stop="openSubControl('Customer')">Customer Services</div>
       </div>
       <div class="login-content">
         <h2 v-if="!Status" class="login" @click="login()">Login</h2>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <transition name="sub">
-      <div v-if="show" class="sub-control">
+      <div v-if="show" class="sub-control" @click.stop="">
         <div class="control-content">
           <div v-for="item in HeaderControl[currentControl]" :key="item">
             {{ item }}
@@ -48,6 +48,7 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex"
 import { HeaderControl } from "@/config/application/HeaderControl";
+import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore()
@@ -71,7 +72,9 @@ export default defineComponent({
       store.dispatch("Component/SetSingin", {status: true, component: "Login"})
     };
 
-    return { HeaderControl, Status, show, currentControl, openSubControl, login };
+    mitt.on("close", closeSubControl)
+
+    return { HeaderControl, Status, show, currentControl, openSubControl, closeSubControl, login };
   },
 });
 </script>
