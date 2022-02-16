@@ -46,7 +46,7 @@ export default defineComponent({
     const changeGameType = (newGameType: string) => {
       showGameTypeList.value = false
       gameType.value = GameTypes[newGameType]
-      store.dispatch("Global/SetGameType", gameType.value)
+      store.dispatch("Global/SetGameType", newGameType)
     }
 
     const closeAll = () => {

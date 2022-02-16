@@ -140,6 +140,7 @@ export default defineComponent({
     let liveDatas = computed(() => { return store.getters["Live/GetGameDatas"] });
 
     const getLiveData = async () => {
+      store.dispatch("Live/SetGameDatas", {} as IGameData)
       await LiveGame({gameType: GameType.value}).then((res) => {
         const { liveDatas, leagueMappintg, gameMappintg } = tidyData(res.gameLiveDtos) as { liveDatas: IGameData; leagueMappintg: IStringDict; gameMappintg: IStringDict }
         store.dispatch("Live/SetGameDatas", liveDatas)

@@ -14,7 +14,7 @@ export const tidyData = (liveDtos: Array<IResApiLiveGame>) => {
     const liveDatas = {} as IGameData
     let leagueMappintg = {} as IStringDict
     let gameMappintg = {} as IStringDict
-    if (liveDtos == null || liveDtos.length <= 0) return
+    if (liveDtos == null || liveDtos.length <= 0) return { liveDatas: liveDatas, leagueMappintg: leagueMappintg, gameMappintg: gameMappintg}
     liveDtos.forEach((item: IResApiLiveGame) => {
         if (item.gameStatus == "Final") return
         const gameData = {} as IGame;
