@@ -119,7 +119,7 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, reactive, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue'
 import { useStore } from "vuex"
 import { LiveGame } from "@/api/home"
 import { IGameData } from "@/type/Live"
