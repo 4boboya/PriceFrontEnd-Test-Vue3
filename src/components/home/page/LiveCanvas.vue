@@ -59,6 +59,7 @@ export default defineComponent({
     const draw = (e: MouseEvent) => {
       if (drawing.value && ctx.value) {
         if (eraser.value) {
+          ctx.value.lineCap = "round";
           ctx.value.clearRect(e.offsetX - size.value/2, e.offsetY - size.value/2, size.value, size.value);
         } else if (pen.value) {
           ctx.value.beginPath();

@@ -6,11 +6,13 @@
         <ISingin />
       </div>
     </transition>
+    <AdvBar />
     <div class="content">
       <ControlBar />
       <div class="main">
         <div class="scroll">
           <Live class="content-data" />
+          <Footer />
         </div>
       </div>
     </div>
@@ -70,6 +72,7 @@ export default defineComponent({
   components: {
     ControlBar: defineAsyncComponent(() => import("@/components/home/ui/ControlBar.vue")),
     Live: defineAsyncComponent(() => import("@/components/home/page/Live.vue")),
+    AdvBar: defineAsyncComponent(() => import("@/components/advBar/AdvBar.vue"))
   },
   setup() {
     const store = useStore();

@@ -15,10 +15,10 @@
     <div v-show="Memo" class="control" :class="`${pen ? 'use-control' : ''}`" @click="usePen()" >
       <icon :icon="['fas', 'pen']" />
     </div>
-    <div v-show="Memo" class="control" @click="showSize = !showSize">
+    <div v-show="Memo" class="control" @click.stop="showSize = !showSize">
       <icon :icon="['fas', 'text-height']" />
     </div>
-    <div v-show="Memo" class="control" @click="showColor = !showColor">
+    <div v-show="Memo" class="control" @click.stop="showColor = !showColor">
       <icon :icon="['fas', 'fill-drip']" />
     </div>
     <div v-show="Memo" class="control" @click="save()">
@@ -28,14 +28,14 @@
       <icon :icon="['fas', 'times']" />
     </div>
     <transition name="size">
-      <div v-if="showSize" class="size-options">
+      <div v-if="showSize" class="size-options" @click.stop="">
         <div v-for="item in FontSize" :key="`size_${item}`" @click="changeSize(item); showSize = false; " >
           {{ item }}
         </div>
       </div>
     </transition>
     <transition name="color">
-      <div v-if="showColor" class="color-options">
+      <div v-if="showColor" class="color-options" @click.stop="">
         <input v-model="inputColor" type="color" />
       </div>
     </transition>
@@ -118,9 +118,24 @@ export default defineComponent({
       mitt.emit('save')
     }
 
+    const closeAll = () => {
+      showSize.value = false
+      showColor.value = false
+    }
+
+    mitt.on("close", closeAll)
+
     watch(
       () => { return inputColor.value },
       () => { changeColor(inputColor.value) }
+    )
+    watch(
+      () => { return showSize.value },
+      () => { if (showSize.value) showColor.value = false }
+    )
+    watch(
+      () => { return showColor.value },
+      () => { if (showColor.value) showSize.value = false }
     )
 
     return { FontSize, Memo, showSize, showColor, save, clear, font, eraser, pen, color, size, inputColor, setMemo, useEraser, usePen, useFont, changeColor, changeSize }

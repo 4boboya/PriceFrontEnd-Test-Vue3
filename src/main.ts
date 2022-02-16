@@ -20,6 +20,7 @@ app.component('icon', FontAwesomeIcon)
 app.component('Header', Component.Header)
 app.component('ISingin', Component.ISingin)
 app.component('HotGame', Component.HotGame)
+app.component('Footer', Component.Footer)
 
 Directive(app)
 
