@@ -2,7 +2,7 @@
   <div>
     <HotGame v-if="Width > 868"/>
     <transition name="login">
-      <div v-if="ISingin.status">
+      <div v-if="Singin.status">
         <ISingin />
       </div>
     </transition>
@@ -11,7 +11,9 @@
       <ControlBar />
       <div class="main">
         <div class="scroll">
-          <Live class="content-data" />
+          <div class="content-data">
+            <Live v-if="page == 'Live'"/>
+          </div>
           <Footer />
         </div>
       </div>
@@ -64,7 +66,7 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, defineAsyncComponent, ref, provide } from "vue";
+import { computed, defineComponent, defineAsyncComponent, ref, provide, watch } from "vue";
 import { useStore } from "vuex";
 import { TFunc, TInputFunc } from "@/type/Global"
 import { UseEraserFunc, UsePenFunc, UseFontFunc, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
@@ -76,8 +78,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const ISingin = computed(() => store.getters["Component/GetSingin"]);
+    const Singin = computed(() => store.getters["Component/GetSingin"]);
     const Width = computed(() => store.getters["Global/GetWidth"]);
+
+    let page = ref<string>("Live")
+    provide("page", page)
 
     let eraser = ref<boolean>(false);
     let pen = ref<boolean>(true);
@@ -119,7 +124,7 @@ export default defineComponent({
     provide(ChangeColorFunc, changeColor)
     provide(ChangeSizeFunc, changeSize)
 
-    return { ISingin, Width };
+    return { Singin, Width, page };
   },
 });
 </script>

@@ -12,14 +12,14 @@
       <div :active="page == 'Results'" @click="page = 'Results'">Results</div>
     </template>
     <template v-else>
-      <div v-show="!Memo" class="control-type-list" @click="showList = !showList">
-        {{ current }}
+      <div v-show="!Memo" class="control-type-list" @click.stop="showList = !showList">
+        {{ page }}
       </div>
       <transition name="gametype">
         <div v-if="showList" class="type-options">
-          <div @click="current = 'Live'">Live</div>
-          <div @click="current = 'Analysis'">Analysis & Predictions</div>
-          <div @click="current = 'Results'">Results</div>
+          <div @click="page = 'Live'; showList = false">Live</div>
+          <div @click="page = 'Analysis'; showList = false">Analysis & Predictions</div>
+          <div @click="page = 'Results'; showList = false">Results</div>
         </div>
       </transition>
     </template>
@@ -80,18 +80,25 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, inject } from "vue";
 import { useStore } from "vuex";
+import mitt from "@/library/global/Mitt"
+
 export default defineComponent({
   setup() {
     const store = useStore();
     const Width = computed(() => { return store.getters["Global/GetWidth"] });
     const Memo = computed(() => { return store.getters["Component/GetMemo"]})
-    let page = ref<string>("Live");
-    let current = ref<string>("Live");
+    let page = inject("page");
     let showList = ref<boolean>(false);
     
-    return { Width, Memo, page, current, showList }
+    const closeAll = () => {
+      showList.value = false
+    }
+
+    mitt.on("close", closeAll)
+
+    return { Width, Memo, page, showList }
   },
 });
 </script>

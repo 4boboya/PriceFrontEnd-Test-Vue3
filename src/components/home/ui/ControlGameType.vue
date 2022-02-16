@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!Memo" class="control-gametype" @click="showGameTypeList = !showGameTypeList" >
+  <div v-show="!Memo" class="control-gametype" @click.stop="showGameTypeList = !showGameTypeList" >
     {{ gameType }}
   </div>
   <transition name="gametype">
@@ -34,6 +34,7 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { GameTypes } from "@/config/global/GameType";
+import mitt from "@/library/global/Mitt"
 
 export default defineComponent({
   setup() {
@@ -47,6 +48,12 @@ export default defineComponent({
       gameType.value = GameTypes[newGameType]
       store.dispatch("Global/SetGameType", gameType.value)
     }
+
+    const closeAll = () => {
+      showGameTypeList.value = false
+    }
+
+    mitt.on("close", closeAll)
 
     return { GameTypes, Memo, showGameTypeList, gameType, changeGameType }
   },

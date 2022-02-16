@@ -107,7 +107,6 @@ export default defineComponent({
     }
 
     const clear = () => { 
-      console.log("clear")
       if (canvas.value && ctx.value) {
         ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
       }
