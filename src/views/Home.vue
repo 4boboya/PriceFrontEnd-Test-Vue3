@@ -2,15 +2,15 @@
   <div>
     <HotGame v-if="Width > 868"/>
     <transition name="login">
-      <div v-if="Singin.status">
-        <Singin />
+      <div v-if="ISingin.status">
+        <ISingin />
       </div>
     </transition>
     <div class="content">
       <ControlBar />
       <div class="main">
         <div class="scroll">
-          <!-- <Live class="content-data" :save="save" :color="color" :size="size" :eraser="eraser" :pen="pen" :font="font" :clear="clear" @clearDone="clearDone()"/> -->
+          <Live class="content-data" />
         </div>
       </div>
     </div>
@@ -64,15 +64,16 @@
 <script lang="ts">
 import { computed, defineComponent, defineAsyncComponent, ref, provide } from "vue";
 import { useStore } from "vuex";
-import { Func, InputFunc } from "@/type/Global"
+import { TFunc, TInputFunc } from "@/type/Global"
 import { UseEraserFunc, UsePenFunc, UseFontFunc, ClearCanvas, SaveCanvas, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
 export default defineComponent({
   components: {
     ControlBar: defineAsyncComponent(() => import("@/components/ui/home/ControlBar.vue")),
+    Live: defineAsyncComponent(() => import("@/components/page/home/Live.vue")),
   },
   setup() {
     const store = useStore();
-    const Singin = computed(() => store.getters["Component/GetSingin"]);
+    const ISingin = computed(() => store.getters["Component/GetSingin"]);
     const Width = computed(() => store.getters["Global/GetWidth"]);
 
     let eraser = ref<boolean>(false);
@@ -83,15 +84,15 @@ export default defineComponent({
       pen.value = false
       font.value = false
     }
-    const useEraser: Func = () => {
+    const useEraser: TFunc = () => {
       resetUse();
       eraser.value = true;
     }
-    const usePen: Func = () => {
+    const usePen: TFunc = () => {
       resetUse();
       pen.value = true;
     }
-    const useFont: Func = () => {
+    const useFont: TFunc = () => {
       resetUse();
       font.value = true;
     }
@@ -104,10 +105,10 @@ export default defineComponent({
     
     let color = ref<string>("#FFFFFF");
     let size = ref<number>(4);
-    const changeColor: InputFunc<string> = (newColor: string) => {
+    const changeColor: TInputFunc<string> = (newColor: string) => {
       color.value = newColor
     }
-    const changeSize: InputFunc<number> = (newSize: number) => {
+    const changeSize: TInputFunc<number> = (newSize: number) => {
       size.value = newSize
     }
     provide("color", color)
@@ -115,16 +116,16 @@ export default defineComponent({
     provide(ChangeColorFunc, changeColor)
     provide(ChangeSizeFunc, changeSize)
 
-    const clear: Func = () => {
+    const clear: TFunc = () => {
       console.log("clear")
     }
-    const save: Func = () => {
+    const save: TFunc = () => {
       console.log("save")
     }
     provide(ClearCanvas, clear)
     provide(SaveCanvas, save)
 
-    return { Singin, Width };
+    return { ISingin, Width };
   },
 });
 </script>

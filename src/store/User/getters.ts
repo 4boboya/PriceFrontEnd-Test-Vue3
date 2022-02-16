@@ -1,13 +1,13 @@
 import { GetterTree } from "vuex"
 import { TState } from "./state"
-import { UserInfo, Wallet } from "@/type/Vuex"
+import { IUserInfo, IWallet } from "@/type/Vuex"
 
 
 type Getters = {
     GetStatus(state: TState): boolean
     GetFinger(state: TState): string | null
-    GetUserInfo(state: TState): UserInfo
-    GetWallet(state: TState): Wallet
+    GetUserInfo(state: TState): IUserInfo
+    GetWallet(state: TState): IWallet
 }
 
 export const getters: GetterTree<TState, TState> & Getters = {
@@ -21,6 +21,6 @@ export const getters: GetterTree<TState, TState> & Getters = {
         return state.User
     },
     GetWallet(state) {
-        return state.Wallet
+        return state.IWallet
     },
 }

@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import Component from "./components"
 import './styles/app.scss'
+import Directive from './directive'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,7 +18,9 @@ const app = createApp(App).use(store).use(router)
 
 app.component('icon', FontAwesomeIcon)
 app.component('Header', Component.Header)
-app.component('Singin', Component.Singin)
+app.component('ISingin', Component.ISingin)
 app.component('HotGame', Component.HotGame)
+
+Directive(app)
 
 app.mount('#app')

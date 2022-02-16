@@ -1,7 +1,7 @@
-export interface Dict {
+export interface IDict {
     [name: string]: string
 }
 
-export type Func = () => void
+export type TFunc = () => void
 
-export type InputFunc<T> = (val: T) => void
+export type TInputFunc<T> = (val: T) => void

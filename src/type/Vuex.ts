@@ -1,9 +1,9 @@
-export interface Singin {
+export interface ISingin {
     status: boolean,
     component?: string
 }
 
-export interface UserInfo {
+export interface IUserInfo {
     Account: string,
     Password: string | null,
     AddTime: string | null,
@@ -14,11 +14,11 @@ export interface UserInfo {
     AuthKey: string,
 }
 
-export interface Wallet {
+export interface IWallet {
     Point: number,
     Subscriber: number,
 }
 
-export interface User extends UserInfo {
-    Wallet: Wallet
+export interface IUser extends IUserInfo {
+    IWallet: IWallet
 }

@@ -1,6 +1,6 @@
 import { MutationTree } from "vuex"
 import { TState } from "./state"
-import { UserInfo, Wallet } from "@/type/Vuex"
+import { IUserInfo, IWallet } from "@/type/Vuex"
 
 export const enum MutauionType {
     SetStatus = "SetStatus",
@@ -12,8 +12,8 @@ export const enum MutauionType {
 export type TMutations = {
     [MutauionType.SetStatus](state: TState, status: boolean): void
     [MutauionType.SetFinger](state: TState, finger: string): void
-    [MutauionType.SetUserInfo](state: TState, user: UserInfo): void
-    [MutauionType.SetWallet](state: TState, wallet: Wallet): void
+    [MutauionType.SetUserInfo](state: TState, user: IUserInfo): void
+    [MutauionType.SetWallet](state: TState, wallet: IWallet): void
 }
 
 export const mutations: MutationTree<TState> & TMutations = {
@@ -27,6 +27,6 @@ export const mutations: MutationTree<TState> & TMutations = {
         state.User = user
     },
     [MutauionType.SetWallet](state, wallet) {
-        state.Wallet = wallet
+        state.IWallet = wallet
     },
 }

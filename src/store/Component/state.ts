@@ -1,6 +1,6 @@
 export type TState = {
     SinginComponent: string,
-    Singin: boolean,
+    ISingin: boolean,
     Memo: boolean,
     SideBar: boolean,
 }
@@ -8,7 +8,7 @@ export type TState = {
 
 export const state: TState = {
     SinginComponent: "",
-    Singin: false,
+    ISingin: false,
     Memo: false,
     SideBar: false,
 }

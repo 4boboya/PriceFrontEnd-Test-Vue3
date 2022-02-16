@@ -37,12 +37,12 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { LoginData } from "@/type/Login"
+import { ILoginData } from "@/type/Login"
 import { useStore } from "vuex"
 export default defineComponent({
   setup() {
     const store = useStore()
-    let loginData = reactive({} as LoginData)
+    let loginData = reactive({} as ILoginData)
 
     const register = () => {
       store.dispatch("Component/SetSingin", {status: true, component: "Register"})

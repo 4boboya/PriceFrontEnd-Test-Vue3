@@ -1,6 +1,6 @@
-import { Dict } from "@/type/Global"
+import { IDict } from "@/type/Global"
 
-export const GameTypes: Dict = {
+export const GameTypes: IDict = {
     "BK": "BasketBall",
     "SC": "Soccer",
     "BS": "BaseBall",

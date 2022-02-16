@@ -1,7 +1,7 @@
 import { ActionContext, ActionTree } from "vuex"
 import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
-import { UserInfo, Wallet, User } from "@/type/Vuex"
+import { IUserInfo, IWallet, IUser } from "@/type/Vuex"
 
 const enum ActionType {
     SetStatus = "SetStatus",
@@ -14,9 +14,9 @@ const enum ActionType {
 type TActions = {
     [ActionType.SetStatus](context: ActionAugments, status: boolean): void
     [ActionType.SetFinger](context: ActionAugments, finger: string): void
-    [ActionType.SetUserInfo](context: ActionAugments, user: UserInfo): void
-    [ActionType.SetWallet](context: ActionAugments, wallet: Wallet): void
-    [ActionType.SetUser](context: ActionAugments, user: User): void
+    [ActionType.SetUserInfo](context: ActionAugments, user: IUserInfo): void
+    [ActionType.SetWallet](context: ActionAugments, wallet: IWallet): void
+    [ActionType.SetUser](context: ActionAugments, user: IUser): void
 }
 
 type ActionAugments = Omit<ActionContext<TState, TState>, 'commit'> & {
@@ -50,8 +50,8 @@ export const actions: ActionTree<TState, TState> & TActions = {
             Name: user.Name,
             Site: user.Site,
             AuthKey: user.AuthKey,
-        } as UserInfo
+        } as IUserInfo
         commit(MutauionType.SetUserInfo, userInfo)
-        commit(MutauionType.SetWallet, user.Wallet)
+        commit(MutauionType.SetWallet, user.IWallet)
     }
 }

@@ -1,6 +1,6 @@
 import { GetterTree } from "vuex"
 import { TState } from "./state"
-import { Singin } from "@/type/Vuex"
+import { ISingin } from "@/type/Vuex"
 
 
 type Getters = {

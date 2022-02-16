@@ -1,7 +1,7 @@
 import { ActionContext, ActionTree } from "vuex"
 import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
-import { Singin } from "@/type/Vuex"
+import { ISingin } from "@/type/Vuex"
 
 const enum ActionType {
     SetSingin = "SetSingin",
@@ -10,7 +10,7 @@ const enum ActionType {
 }
 
 type TActions = {
-    [ActionType.SetSingin](context: ActionAugments, singin: Singin): void
+    [ActionType.SetSingin](context: ActionAugments, singin: ISingin): void
     [ActionType.SetMemo](context: ActionAugments, status: boolean): void
     [ActionType.SetSideBar](context: ActionAugments, status: boolean): void
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="live" ref="live-data">
+    <LiveCanvas v-if="Memo"/>
     <div>
       <div v-for="(item, LID) in liveDatas" :key="`oddtable_${LID}`">
         <div v-collapse:check="`${LID}_${Object.keys(liveDatas).indexOf(LID)}`" class="title">{{ Object.values(item)[0].League }}</div>
@@ -91,8 +92,8 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/style/_live.scss";
-@import "@/style/_common.scss";
+@import "@/styles/component/_live.scss";
+@import "@/styles/_common.scss";
 @include mixin-phone {
   .title {
     font-size: 12px;
@@ -118,14 +119,21 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, reactive } from 'vue'
 import { useStore } from "vuex"
+import { IGameData } from "@/type/Live"
+import { liveData } from "@/config/Test"
 export default defineComponent({
+  components: {
+    Odd: defineAsyncComponent(() => import("./Odd.vue")),
+    LiveCanvas: defineAsyncComponent(() => import("./LiveCanvas.vue")),
+  },
   setup() {
     const store = useStore();
     let Memo = computed(() => { return store.getters["Component/GetMemo"] });
+    let liveDatas = reactive(liveData as IGameData)
 
-    return { Memo }
+    return { Memo, liveDatas }
   }
 })
 </script>

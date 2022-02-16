@@ -2,9 +2,9 @@
 <!-- 完全沒odd -->
     <div
       v-if="
-        (computedData['HA'] == undefined || computedData['HA'].spread == undefined) &&
-        (computedData['1X2'] == undefined || computedData['1X2'].spread == undefined) &&
-        (computedData['OU'] == undefined || computedData['OU'].spread == undefined)
+        (gameData['HA']?.value.spread == undefined) &&
+        (gameData['1X2']?.value.spread == undefined) &&
+        (gameData['OU']?.value.spread == undefined)
       "
       class="odd"
     >
@@ -13,82 +13,85 @@
       <div></div>
     </div>
 <!-- HA為負 -->
-    <div v-else-if="(computedData['HA'] != undefined && computedData['HA'].spread != undefined) && computedData['HA'].spread.indexOf('-') == 0" class="odd">
-      <div v-if="computedData['OU'] == undefined || computedData['OU'].spread == undefined">
+    <div v-else-if="(gameData['HA']?.value.spread != undefined) && gameData['HA']?.value.spread.indexOf('-') == 0" class="odd">
+      <div v-if="gameData['OU']?.value.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ computedData["OU"].spread }}</div>
+        <div>{{ gameData["OU"].value.spread }}</div>
         <div>
-          {{ computedData["OU"].o }} /
-          {{ computedData["OU"].u }}
+          {{ gameData["OU"].value.o }} /
+          {{ gameData["OU"].value.u }}
         </div>
       </div>
-      <div v-if="computedData['1X2'] == undefined || computedData['1X2'].spread == undefined">
+      <div v-if="gameData['1X2']?.value.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ computedData["1X2"].spread }}</div>
+        <div>{{ gameData["1X2"].value.spread }}</div>
         <div>
-          {{ computedData["1X2"].h }} /
-          {{ computedData["1X2"].a }}
+          {{ gameData["1X2"].value.h }} /
+          {{ gameData["1X2"].value.a }}
         </div>
       </div>
       <div>
-        <div>{{ computedData["HA"].spread.substring(1) }}</div>
+        <div>{{ gameData["HA"]?.value.spread.substring(1) }}</div>
         <div>
-          {{ computedData["HA"].h }} /
-          {{ computedData["HA"].a }}
+          {{ gameData["HA"].value.h }} /
+          {{ gameData["HA"].value.a }}
         </div>
       </div>
     </div>
 <!-- HA為正 -->
     <div v-else class="odd">
-      <div v-if="computedData['HA'] == undefined || computedData['HA'].spread == undefined">
+      <div v-if="gameData['HA']?.value.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ computedData["HA"].spread }}</div>
+        <div>{{ gameData["HA"].value.spread }}</div>
         <div>
-          {{ computedData["HA"].h }} /
-          {{ computedData["HA"].a }}
+          {{ gameData["HA"].value.h }} /
+          {{ gameData["HA"].value.a }}
         </div>
       </div>
-      <div v-if="computedData['1X2'] == undefined || computedData['1X2'].spread == undefined">
+      <div v-if="gameData['1X2']?.value.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ computedData["1X2"].spread }}</div>
+        <div>{{ gameData["1X2"].value.spread }}</div>
         <div>
-          {{ computedData["1X2"].h }} /
-          {{ computedData["1X2"].a }}
+          {{ gameData["1X2"].value.h }} /
+          {{ gameData["1X2"].value.a }}
         </div>
       </div>
-      <div v-if="computedData['OU'] == undefined || computedData['OU'].spread == undefined">
+      <div v-if="gameData['OU']?.value.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ computedData["OU"].spread }}</div>
+        <div>{{ gameData["OU"].value.spread }}</div>
         <div>
-          {{ computedData["OU"].o }} /
-          {{ computedData["OU"].u }}
+          {{ gameData["OU"].value.o }} /
+          {{ gameData["OU"].value.u }}
         </div>
       </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-@import "@/style/_live.scss";
+@import "@/styles/component/_live.scss";
 </style>
 
-<script>
-export default {
-  props: ["data"],
-
-  computed: {
-    computedData() {
-      return this.data
-    }
+<script lang="ts">
+import { defineComponent, toRefs, Ref } from 'vue'
+import { IGameData } from "@/type/Live"
+export default defineComponent({
+  props: {
+    data: {} as IGameData
   },
-};
+  setup(props) {
+    const gameData = toRefs((toRefs(props).data as Ref<IGameData>).value)
+    
+    return { gameData }
+  }
+})
 </script>

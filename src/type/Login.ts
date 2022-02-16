@@ -1,4 +1,4 @@
-export interface LoginData {
+export interface ILoginData {
     account: string,
     password: string,
     site: string,
@@ -6,7 +6,7 @@ export interface LoginData {
     username: string,
 }
 
-export interface RegisterData {
+export interface IRegisterData {
     username: string,
     email: string,
     pwd: string,

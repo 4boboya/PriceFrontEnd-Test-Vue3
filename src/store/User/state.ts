@@ -1,10 +1,10 @@
-import { UserInfo, Wallet } from "@/type/Vuex"
+import { IUserInfo, IWallet } from "@/type/Vuex"
 
 export type TState = {
     Status: boolean,
     Finger: string | null,
-    User: UserInfo,
-    Wallet: Wallet,
+    User: IUserInfo,
+    IWallet: IWallet,
 }
 
 
@@ -21,7 +21,7 @@ export const state: TState = {
         Site: "",
         AuthKey: "",
     },
-    Wallet: {
+    IWallet: {
         Point: 0,
         Subscriber: 0,
     },

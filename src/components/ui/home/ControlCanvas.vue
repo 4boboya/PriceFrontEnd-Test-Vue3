@@ -85,7 +85,7 @@
 import { defineComponent, computed, ref, inject, watch, toRef } from 'vue'
 import { useStore } from "vuex"
 import { UseEraserFunc, UsePenFunc, UseFontFunc, ClearCanvas, SaveCanvas, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"
-import { Func, InputFunc} from "@/type/Global"
+import { TFunc, TInputFunc} from "@/type/Global"
 import { FontSize } from "@/config/application/Font"
 export default defineComponent({
   setup() {
@@ -96,13 +96,13 @@ export default defineComponent({
     const font = inject("font") as boolean;
     const eraser = inject("eraser") as boolean;
     const pen = inject("pen") as boolean;
-    const useEraser = inject(UseEraserFunc) as Func;
-    const usePen = inject(UsePenFunc) as Func;
-    const useFont = inject(UseFontFunc) as Func;
-    const changeColor = inject(ChangeColorFunc) as InputFunc<string>;
-    const changeSize = inject(ChangeSizeFunc) as InputFunc<number>;
-    const clear = inject(ClearCanvas) as Func;
-    const save = inject(SaveCanvas) as Func;
+    const useEraser = inject(UseEraserFunc) as TFunc;
+    const usePen = inject(UsePenFunc) as TFunc;
+    const useFont = inject(UseFontFunc) as TFunc;
+    const changeColor = inject(ChangeColorFunc) as TInputFunc<string>;
+    const changeSize = inject(ChangeSizeFunc) as TInputFunc<number>;
+    const clear = inject(ClearCanvas) as TFunc;
+    const save = inject(SaveCanvas) as TFunc;
     let showSize = ref<boolean>(false);
     let showColor = ref<boolean>(false);
     let inputColor = ref(ref(color).value);
