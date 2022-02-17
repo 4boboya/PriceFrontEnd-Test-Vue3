@@ -1,14 +1,14 @@
-import { IGameData, ILeague, IGame, IOdds, IOdd, ISiteOdds, IResApiLiveGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
+import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiLiveGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
 import { IDict, IStringDict } from "@/type/Global"
 
 const siteModel = {
-  "bet365.com": {},
-  "betfair.com": {},
-  "bwin.com": {},
-  "ku888": {},
-  "twsl": {},
-  "pinnacle.com": {},
-}
+  "bet365.com": {} as IOdds,
+  "betfair.com": {} as IOdds,
+  "bwin.com": {} as IOdds,
+  "ku888": {} as IOdds,
+  "twsl": {} as IOdds,
+  "pinnacle.com": {} as IOdds,
+} as ISite
 
 export const tidyData = (liveDtos: Array<IResApiLiveGame>): ITidyDataRes => {
     const liveDatas = {} as IGameData
@@ -42,7 +42,7 @@ export const tidyData = (liveDtos: Array<IResApiLiveGame>): ITidyDataRes => {
 }
 
 const tidySite = (siteDtos: Array<ISiteGameDtos>, lid: string, gid: string) => {
-    const siteData: IDict<IOdds> = JSON.parse(JSON.stringify(siteModel)) as IDict<IOdds>;
+    const siteData: ISite = JSON.parse(JSON.stringify(siteModel)) as ISite;
     const siteMergeLeagueMapping: IDict<string> = {}
     const siteMergeGameMapping: IDict<string> = {}
     siteDtos.forEach((siteItem: ISiteGameDtos) => {
