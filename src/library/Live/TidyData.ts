@@ -174,7 +174,6 @@ const getOdds = (siteItem: IWSLiveData) => {
     return siteData
 }
 
-
 const getWSOU = (ou: IWSOdds) => {
     const ouData: IOdd = {};
     ou.Prices.forEach((priceItem: IWSPrices) => {
