@@ -1,15 +1,13 @@
-import { IGameData } from "@/type/Live"
+import { IHotGame } from "@/type/Live"
 import { IStringDict } from "@/type/Global"
 
 export type TState = {
-    GameDatas: IGameData,
-    SiteLeagueMapping: IStringDict,
+    HotGames: IHotGame,
     SiteGameMapping: IStringDict
 }
 
 
 export const state: TState = {
-    GameDatas: {} as IGameData,
-    SiteLeagueMapping: {},
+    HotGames: {} as IHotGame,
     SiteGameMapping: {}
 }

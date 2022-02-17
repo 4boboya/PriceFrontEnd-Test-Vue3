@@ -1,4 +1,4 @@
-import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiLiveGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
+import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
 import { IDict, IStringDict } from "@/type/Global"
 
 const siteModel = {
@@ -10,12 +10,12 @@ const siteModel = {
   "pinnacle.com": {} as IOdds,
 } as ISite
 
-export const tidyData = (liveDtos: Array<IResApiLiveGame>): ITidyDataRes => {
-    const liveDatas = {} as IGameData
-    let leagueMappintg = {} as IStringDict
-    let gameMappintg = {} as IStringDict
-    if (liveDtos == null || liveDtos.length <= 0) return { liveDatas: liveDatas, leagueMappintg: leagueMappintg, gameMappintg: gameMappintg}
-    liveDtos.forEach((item: IResApiLiveGame) => {
+export const tidyData = (liveDtos: Array<IResApiGame>): ITidyDataRes => {
+    const liveDatas: IGameData = {}
+    let leagueMapping: IStringDict = {}
+    let gameMapping: IStringDict = {}
+    if (liveDtos == null || liveDtos.length <= 0) return { liveDatas: liveDatas, leagueMapping: leagueMapping, gameMapping: gameMapping}
+    liveDtos.forEach((item: IResApiGame) => {
         if (item.gameStatus == "Final") return
         const gameData = {} as IGame;
         if (!Object.keys(liveDatas).includes(item.leagueID)) {
@@ -33,16 +33,16 @@ export const tidyData = (liveDtos: Array<IResApiLiveGame>): ITidyDataRes => {
         gameData.ScoreA = item.score2;
         gameData.Live = item.liveUrl
         gameData.Site = siteData;
-        leagueMappintg = Object.assign(leagueMappintg, siteMergeLeagueMapping)
-        gameMappintg = Object.assign(gameMappintg, siteMergeGameMapping)
+        leagueMapping = Object.assign(leagueMapping, siteMergeLeagueMapping)
+        gameMapping = Object.assign(gameMapping, siteMergeGameMapping)
         liveDatas[item.leagueID][item.gameID] = gameData
     });
     
-    return { liveDatas: liveDatas, leagueMappintg: leagueMappintg, gameMappintg: gameMappintg}
+    return { liveDatas: liveDatas, leagueMapping: leagueMapping, gameMapping: gameMapping}
 }
 
 const tidySite = (siteDtos: Array<ISiteGameDtos>, lid: string, gid: string) => {
-    const siteData: ISite = JSON.parse(JSON.stringify(siteModel)) as ISite;
+    const siteData: ISite = JSON.parse(JSON.stringify(siteModel));
     const siteMergeLeagueMapping: IDict<string> = {}
     const siteMergeGameMapping: IDict<string> = {}
     siteDtos.forEach((siteItem: ISiteGameDtos) => {
@@ -54,12 +54,12 @@ const tidySite = (siteDtos: Array<ISiteGameDtos>, lid: string, gid: string) => {
 }
 
 const singleSiteAPI = (siteItem: ISiteGameDtos) => {
-    const siteData = {
+    const siteData: IOdds = {
         "ID": siteItem.gameID,
         "HA": {},
         "1X2": {},
         "OU": {},
-    } as IOdds;
+    };
     siteItem.odds.forEach((oddItem: ISiteOdds) => {
         if (oddItem.playMode.includes("OU")) {
             siteData['OU'] = getOU(oddItem)
@@ -74,7 +74,7 @@ const singleSiteAPI = (siteItem: ISiteGameDtos) => {
 }
 
 const getOU = (ou: ISiteOdds) => {
-    const ouData = {} as IOdd;
+    const ouData: IOdd = {};
     ou.prices.forEach((priceItem: ISitePrices) => {
         if (priceItem.main) {
             ouData['spread'] = `o${priceItem.spread}`
@@ -91,7 +91,7 @@ const getOU = (ou: ISiteOdds) => {
 }
 
 const getHA = (ha: ISiteOdds) => {
-    const haData = { HA: {}, X: {} } as IDict<IOdd>;
+    const haData: IDict<IOdd> = { HA: {}, X: {} };
     ha.prices.forEach((priceItem: ISitePrices) => {
         if (priceItem.main) {
             if (priceItem.spread == "1X2") {

@@ -9,16 +9,16 @@
     <div class="carousel">
       <div
         class="hotgame-card"
-        v-for="(item, index) in 10"
-        :key="`hotgame_${item}_${index}`"
+        v-for="(item, key) in hotGameDatas"
+        :key="`hotgame_${key}`"
       >
-        <div class="hotgame-league">XXX</div>
+        <div class="hotgame-league">{{ item.League }}</div>
         <div class="hotgame-team">
-          <div :ref="`${item.GameID}`" class="hotgame-team-h">XXX</div>
-          <div style="padding-inline: 3px">XXX:XXX</div>
-          <div :ref="`${item.GameID}`" class="hotgame-team-a">XXX</div>
+          <div :ref="`${item.GameID}`" class="hotgame-team-h">{{ item.TeamH }}</div>
+          <div style="padding-inline: 3px">{{ item.ScoreH }}:{{ item.ScoreA }}</div>
+          <div :ref="`${item.GameID}`" class="hotgame-team-a">{{ item.TeamA }}</div>
         </div>
-        <div>XXX XXX</div>
+        <div>{{ item.GameDate }} {{ item.GameTime }}</div>
       </div>
     </div>
   </div>
@@ -56,13 +56,13 @@
 }
 
 .hotgame-card {
-  height: 75px;
+  height: 85px;
   min-width: 300px;
   border-radius: 5px;
   border-left: 2px solid #618730;
   color: #dedede;
   background-color: #343444;
-  padding: 10px 15px;
+  padding: 5px 15px;
   box-shadow: 1.5px 1.5px 4px #ffffff45;
   font-size: 13px;
 
@@ -92,14 +92,28 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useStore } from "vuex"
+import { HotGame } from "@/api/home"
+import { tidyData } from "@/library/HotGame/ApiData"
 export default defineComponent({
   setup() {
+    const store = useStore()
+    let hotGameDatas = computed(() => { return store.getters["HotGame/GetHotGames"] });
     let isDown = ref<boolean>(false);
     let start = ref<number>(0);
     let carousel =ref<HTMLElement>();
     let scrollLeft = ref<number>(0);
-    let hotGameDatas = ref<Array<string>>();
+
+    const getHotGame = async () => {
+      await HotGame().then((res) => {
+        if (res?.gameDtos) {
+          const { hotGames, gameMapping } = tidyData(res.gameDtos)
+          store.dispatch("HotGame/SetHotGames", hotGames) 
+          store.dispatch("HotGame/SetSiteGameMapping", gameMapping)
+        }
+      })
+    }
 
     const mousedown = (e:MouseEvent) =>  {
       start.value = e.pageX;
@@ -120,6 +134,8 @@ export default defineComponent({
     const mouseup = () =>  {
       isDown.value = false;
     }
+
+    getHotGame()
 
     return { carousel, hotGameDatas, mousedown, mousemove, mouseup }
   },

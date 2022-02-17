@@ -141,10 +141,10 @@ export default defineComponent({
     const getLiveData = async () => {
       store.dispatch("Live/SetGameDatas", {} as IGameData)
       await LiveGame({gameType: GameType.value}).then((res) => {
-        const { liveDatas, leagueMappintg, gameMappintg } = tidyData(res.gameLiveDtos) as ITidyDataRes
+        const { liveDatas, leagueMapping, gameMapping } = tidyData(res.gameLiveDtos) as ITidyDataRes
         store.dispatch("Live/SetGameDatas", liveDatas)
-        store.dispatch("Live/SetSiteLeagueMapping", leagueMappintg)
-        store.dispatch("Live/SetSiteGameMapping", gameMappintg)
+        store.dispatch("Live/SetSiteLeagueMapping", leagueMapping)
+        store.dispatch("Live/SetSiteGameMapping", gameMapping)
       })
     }
 

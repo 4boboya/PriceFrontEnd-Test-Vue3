@@ -1,18 +1,16 @@
 import { ActionContext, ActionTree } from "vuex"
 import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
-import { IGameData } from "@/type/Live"
+import { IHotGame } from "@/type/Live"
 import { IStringDict } from "@/type/Global"
 
 const enum ActionType {
-    SetGameDatas = "SetGameDatas",
-    SetSiteLeagueMapping = "SetSiteLeagueMapping",
+    SetHotGames = "SetHotGames",
     SetSiteGameMapping = "SetSiteGameMapping"
 }
 
 type TActions = {
-    [ActionType.SetGameDatas](context: ActionAugments, gameDatas: IGameData): void
-    [ActionType.SetSiteLeagueMapping](context: ActionAugments, siteLeagueMapping: IStringDict): void
+    [ActionType.SetHotGames](context: ActionAugments, hotGames: IHotGame): void
     [ActionType.SetSiteGameMapping](context: ActionAugments, siteGameMapping: IStringDict): void
 }
 
@@ -25,11 +23,8 @@ type ActionAugments = Omit<ActionContext<TState, TState>, 'commit'> & {
 
 
 export const actions: ActionTree<TState, TState> & TActions = {
-    [ActionType.SetGameDatas]({ commit }, gameDatas) {
-        commit(MutauionType.SetGameDatas, gameDatas)
-    },
-    [ActionType.SetSiteLeagueMapping]({ commit }, siteLeagueMapping) {
-        commit(MutauionType.SetSiteLeagueMapping, siteLeagueMapping)
+    [ActionType.SetHotGames]({ commit }, hotGames) {
+        commit(MutauionType.SetHotGames, hotGames)
     },
     [ActionType.SetSiteGameMapping]({ commit }, siteGameMapping) {
         commit(MutauionType.SetSiteGameMapping, siteGameMapping)

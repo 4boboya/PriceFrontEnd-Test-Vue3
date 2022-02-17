@@ -1,5 +1,9 @@
 import { IStringDict } from "./Global"
 
+export interface IHotGame {
+    [name: string]: IGame
+}
+
 export interface IGameData {
     [name: string]: ILeague
 }
@@ -44,7 +48,7 @@ export interface IReqApiLiveGame {
     gameType: string,
 }
 
-export interface IResApiLiveGame {
+export interface IResApiGame {
     gameDate: string
     gameID: string
     gameStatus: string
@@ -103,6 +107,11 @@ export interface ISiteOddInfo {
 
 export interface ITidyDataRes {
     liveDatas: IGameData
-    leagueMappintg: IStringDict
-    gameMappintg: IStringDict
+    leagueMapping: IStringDict
+    gameMapping: IStringDict
+}
+
+export interface ITidyHotGameDataRes {
+    hotGames: IHotGame
+    gameMapping: IStringDict
 }

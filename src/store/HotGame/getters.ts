@@ -1,21 +1,17 @@
 import { GetterTree } from "vuex"
 import { TState } from "./state"
-import { IGameData } from "@/type/Live"
+import { IHotGame } from "@/type/Live"
 import { IStringDict } from "@/type/Global"
 
 
 type Getters = {
-    GetGameDatas(state: TState): IGameData,
-    GetSiteLeagueMapping(state: TState): IStringDict
+    GetHotGames(state: TState): IHotGame,
     GetSiteGameMapping(state: TState): IStringDict
 }
 
 export const getters: GetterTree<TState, TState> & Getters = {
-    GetGameDatas(state) {
-        return state.GameDatas
-    },
-    GetSiteLeagueMapping(state) {
-        return state.SiteLeagueMapping
+    GetHotGames(state) {
+        return state.HotGames
     },
     GetSiteGameMapping(state) {
         return state.SiteGameMapping

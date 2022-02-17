@@ -1,5 +1,5 @@
 import axios, { Method } from 'axios';
-import { allowedMethods, timeoutSec, headers, apiUrl, formDataHeaders } from '@/config/global/Http';
+import { allowedMethods, timeoutSec, headers, apiUrl } from '@/config/global/Http';
 const priceCenterAjax = axios.create({
     baseURL: apiUrl,
     headers: headers,
@@ -25,6 +25,6 @@ export async function $priceCenterSite(method: Method, url: string, payload: any
         });
         return response.data;
     } catch (err) {
-        console.log(err)
+        // console.log(err)
     }
 }
