@@ -2,9 +2,9 @@
 <!-- 完全沒odd -->
     <div
       v-if="
-        (gameData['HA']?.value.spread == undefined) &&
-        (gameData['1X2']?.value.spread == undefined) &&
-        (gameData['OU']?.value.spread == undefined)
+        (gameData['HA']?.spread == undefined) &&
+        (gameData['1X2']?.spread == undefined) &&
+        (gameData['OU']?.spread == undefined)
       "
       class="odd"
     >
@@ -13,65 +13,65 @@
       <div></div>
     </div>
 <!-- HA為負 -->
-    <div v-else-if="(gameData['HA']?.value.spread != undefined) && gameData['HA']?.value.spread.indexOf('-') == 0" class="odd">
-      <div v-if="gameData['OU']?.value.spread == undefined">
+    <div v-else-if="(gameData['HA']?.spread != undefined) && gameData['HA']?.spread.indexOf('-') == 0" class="odd">
+      <div v-if="gameData['OU']?.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ gameData["OU"].value.spread }}</div>
+        <div>{{ gameData["OU"].spread }}</div>
         <div>
-          {{ gameData["OU"].value.o }} /
-          {{ gameData["OU"].value.u }}
+          {{ gameData["OU"].o }} /
+          {{ gameData["OU"].u }}
         </div>
       </div>
-      <div v-if="gameData['1X2']?.value.spread == undefined">
+      <div v-if="gameData['1X2']?.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ gameData["1X2"].value.spread }}</div>
+        <div>{{ gameData["1X2"].spread }}</div>
         <div>
-          {{ gameData["1X2"].value.h }} /
-          {{ gameData["1X2"].value.a }}
+          {{ gameData["1X2"].h }} /
+          {{ gameData["1X2"].a }}
         </div>
       </div>
       <div>
-        <div>{{ gameData["HA"]?.value.spread.substring(1) }}</div>
+        <div>{{ gameData["HA"]?.spread.substring(1) }}</div>
         <div>
-          {{ gameData["HA"].value.h }} /
-          {{ gameData["HA"].value.a }}
+          {{ gameData["HA"].h }} /
+          {{ gameData["HA"].a }}
         </div>
       </div>
     </div>
 <!-- HA為正 -->
     <div v-else class="odd">
-      <div v-if="gameData['HA']?.value.spread == undefined">
+      <div v-if="gameData['HA']?.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ gameData["HA"].value.spread }}</div>
+        <div>{{ gameData["HA"].spread }}</div>
         <div>
-          {{ gameData["HA"].value.h }} /
-          {{ gameData["HA"].value.a }}
+          {{ gameData["HA"].h }} /
+          {{ gameData["HA"].a }}
         </div>
       </div>
-      <div v-if="gameData['1X2']?.value.spread == undefined">
+      <div v-if="gameData['1X2']?.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ gameData["1X2"].value.spread }}</div>
+        <div>{{ gameData["1X2"].spread }}</div>
         <div>
-          {{ gameData["1X2"].value.h }} /
-          {{ gameData["1X2"].value.a }}
+          {{ gameData["1X2"].h }} /
+          {{ gameData["1X2"].a }}
         </div>
       </div>
-      <div v-if="gameData['OU']?.value.spread == undefined">
+      <div v-if="gameData['OU']?.spread == undefined">
         N/A
       </div>
       <div v-else>
-        <div>{{ gameData["OU"].value.spread }}</div>
+        <div>{{ gameData["OU"].spread }}</div>
         <div>
-          {{ gameData["OU"].value.o }} /
-          {{ gameData["OU"].value.u }}
+          {{ gameData["OU"].o }} /
+          {{ gameData["OU"].u }}
         </div>
       </div>
     </div>
@@ -82,15 +82,14 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, toRefs, Ref } from 'vue'
-import { IGameData } from "@/type/Live"
+import { defineComponent, toRefs, Ref, PropType } from 'vue'
+import { IGameData } from "@/type/Game"
 export default defineComponent({
   props: {
-    data: {} as IGameData
+    data: {} as PropType<IGameData>
   },
   setup(props) {
-    const gameData = toRefs((toRefs(props).data as Ref<IGameData>).value)
-    
+    const gameData = (toRefs(props).data as Ref<IGameData>)
     return { gameData }
   }
 })

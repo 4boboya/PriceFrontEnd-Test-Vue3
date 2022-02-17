@@ -1,4 +1,4 @@
-import { IGameData } from "@/type/Live"
+import { IGameData } from "@/type/Game"
 import { IStringDict } from "@/type/Global"
 
 export type TState = {

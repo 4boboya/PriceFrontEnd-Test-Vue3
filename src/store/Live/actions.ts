@@ -1,7 +1,7 @@
 import { ActionContext, ActionTree } from "vuex"
 import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
-import { IGameData } from "@/type/Live"
+import { IGameData } from "@/type/Game"
 import { IStringDict } from "@/type/Global"
 
 const enum ActionType {

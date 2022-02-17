@@ -1,5 +1,5 @@
 import { $priceCenterSite } from './html';
-import { IReqApiLiveGame } from '@/type/Live'
+import { IReqApiLiveGame } from '@/type/Game'
 export const HotGame = async () => {
     const hotGameData = await $priceCenterSite('GET', '/game/hotgame', {});
     return hotGameData;

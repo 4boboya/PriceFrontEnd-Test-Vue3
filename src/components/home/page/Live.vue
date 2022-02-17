@@ -119,12 +119,14 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, ref, watch, getCurrentInstance, ComponentInternalInstance  } from 'vue'
 import { useStore } from "vuex"
 import { LiveGame } from "@/api/home"
-import { IGameData, ITidyDataRes } from "@/type/Live"
-import { tidyData } from "@/library/Live/ApiData"
+import { IGameData, ITidyDataRes } from "@/type/Game"
+import { tidyApiData, tidyWSData } from "@/library/Live/TidyData"
 import mitt from "@/library/global/Mitt"
+import Websocket from "@/library/global/Websocket"
+import { LiveWSConfig } from "@/config/application/Websocket"
 import html2canvas from "html2canvas";
 export default defineComponent({
   components: {
@@ -132,19 +134,28 @@ export default defineComponent({
     LiveCanvas: defineAsyncComponent(() => import("./LiveCanvas.vue")),
   },
   setup() {
+    const { proxy } = getCurrentInstance() as ComponentInternalInstance 
     const store = useStore();
     const thisDoc = ref<HTMLElement>();
+    const wsLive = new Websocket();
     let Memo = computed(() => { return store.getters["Component/GetMemo"] });
     let GameType = computed(() => { return store.getters["Global/GetGameType"] });
-    let liveDatas = computed(() => { return store.getters["Live/GetGameDatas"] });
+    let liveDatas = ref(computed(() => { return store.getters["Live/GetGameDatas"] }));
 
     const getLiveData = async () => {
       store.dispatch("Live/SetGameDatas", {} as IGameData)
       await LiveGame({gameType: GameType.value}).then((res) => {
-        const { liveDatas, leagueMapping, gameMapping } = tidyData(res.gameLiveDtos) as ITidyDataRes
-        store.dispatch("Live/SetGameDatas", liveDatas)
-        store.dispatch("Live/SetSiteLeagueMapping", leagueMapping)
-        store.dispatch("Live/SetSiteGameMapping", gameMapping)
+        tidyApiData(res.gameLiveDtos)
+      })
+      connectWSLive()
+    }
+
+    const connectWSLive = () => {
+      wsLive.ConnectHub(LiveWSConfig.url, LiveWSConfig.group, `${GameType.value}_UI`, LiveWSConfig.key);
+      Object.defineProperty(Websocket, 'ResponseMsg', {
+          set: (message: string) => {
+            tidyWSData(message)
+          }
       })
     }
 
@@ -164,7 +175,18 @@ export default defineComponent({
 
     watch(
       () => { return GameType.value },
-      () => { getLiveData() }
+      () => { 
+        wsLive.DeConnection();
+        getLiveData();
+      }
+    )
+
+    watch(
+      () => { return Memo.value },
+      () => {
+        if (Memo.value) wsLive.DeConnection
+        else connectWSLive()
+      }
     )
 
     return { thisDoc, Memo, liveDatas }

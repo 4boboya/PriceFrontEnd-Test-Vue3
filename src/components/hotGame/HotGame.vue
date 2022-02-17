@@ -108,9 +108,7 @@ export default defineComponent({
     const getHotGame = async () => {
       await HotGame().then((res) => {
         if (res?.gameDtos) {
-          const { hotGames, gameMapping } = tidyData(res.gameDtos)
-          store.dispatch("HotGame/SetHotGames", hotGames) 
-          store.dispatch("HotGame/SetSiteGameMapping", gameMapping)
+          tidyData(res.gameDtos)
         }
       })
     }

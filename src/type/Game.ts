@@ -115,3 +115,48 @@ export interface ITidyHotGameDataRes {
     hotGames: IHotGame
     gameMapping: IStringDict
 }
+
+export interface IWSLiveData {
+    GameType: string,
+    Site: string,
+    GameID: string,
+    GameDate: string,
+    GameTime: string,
+    League: string,
+    GameStatus: string,
+    RequestTime: number,
+    Scores: Array<IWSScores>,
+    Team1: string,
+    Team2: string,
+    Score1: number,
+    Score2: number,
+    PlayByPlay: Array<IWSPlayByPlay> | null,
+    Odds: Array<IWSOdds>
+}
+
+export interface IWSScores {
+    Match: string,
+    ScoreTeam1: number,
+    ScoreTeam2: number
+}
+
+export interface IWSPlayByPlay {
+    Key: string,
+    Value: string,
+}
+
+export interface IWSOdds {
+    PlayMode: string
+    Prices: Array<IWSPrices>
+}
+
+export interface IWSPrices {
+    Main: boolean
+    Spread: string
+    Odds: Array<IWSOddInfo>
+}
+
+export interface IWSOddInfo {
+    Odd: number
+    OddType: string
+}

@@ -1,5 +1,7 @@
-import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
+import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, IStatus,
+        IWSLiveData, IWSPlayByPlay, IWSOdds, IWSPrices, IWSOddInfo } from "@/type/Game"
 import { IDict, IStringDict } from "@/type/Global"
+import vuex from "@/store"
 
 const siteModel = {
   "bet365.com": {} as IOdds,
@@ -10,11 +12,11 @@ const siteModel = {
   "pinnacle.com": {} as IOdds,
 } as ISite
 
-export const tidyData = (liveDtos: Array<IResApiGame>): ITidyDataRes => {
+export const tidyApiData = (liveDtos: Array<IResApiGame>) => {
     const liveDatas: IGameData = {}
     let leagueMapping: IStringDict = {}
     let gameMapping: IStringDict = {}
-    if (liveDtos == null || liveDtos.length <= 0) return { liveDatas: liveDatas, leagueMapping: leagueMapping, gameMapping: gameMapping}
+    if (liveDtos == null || liveDtos.length <= 0) return
     liveDtos.forEach((item: IResApiGame) => {
         if (item.gameStatus == "Final") return
         const gameData = {} as IGame;
@@ -37,8 +39,9 @@ export const tidyData = (liveDtos: Array<IResApiGame>): ITidyDataRes => {
         gameMapping = Object.assign(gameMapping, siteMergeGameMapping)
         liveDatas[item.leagueID][item.gameID] = gameData
     });
-    
-    return { liveDatas: liveDatas, leagueMapping: leagueMapping, gameMapping: gameMapping}
+    vuex.dispatch("Live/SetGameDatas", liveDatas)
+    vuex.dispatch("Live/SetSiteLeagueMapping", leagueMapping)
+    vuex.dispatch("Live/SetSiteGameMapping", gameMapping)
 }
 
 const tidySite = (siteDtos: Array<ISiteGameDtos>, lid: string, gid: string) => {
@@ -110,6 +113,105 @@ const getHA = (ha: ISiteOdds) => {
                         haData["HA"]['h'] = oddItem.odd
                     } else if (oddItem.oddType == "A") {
                         haData["HA"]['a'] = oddItem.odd
+                    }
+                });
+            }
+        }
+    });
+    return haData;
+}
+
+export const tidyWSData = (wsDataStr: string) => {
+    // console.log(wsDataStr)
+    if (wsDataStr.includes('DeCompress Error')) return
+    const leagueMapping = vuex.getters["Live/GetSiteLeagueMapping"]
+    const gameMapping = vuex.getters["Live/GetSiteGameMapping"]
+    const wsData = JSON.parse(wsDataStr);
+    const siteGames: Array<IWSLiveData> = wsData.SiteGames
+    const liveDatas: IGameData = JSON.parse(JSON.stringify(vuex.getters["Live/GetGameDatas"])) as IGameData
+    siteGames.forEach((siteGame: IWSLiveData) => {
+        const LID = leagueMapping[siteGame.GameID]
+        const GID = gameMapping[siteGame.GameID]
+        if (LID == undefined || GID == undefined) return
+        if ((siteGame.Site == "bet365.com" || siteGame.Site == "ku888") && siteGame.GameStatus == "InProgress") {
+            liveDatas[LID][GID].ScoreH = siteGame.Score1;
+            liveDatas[LID][GID].ScoreA = siteGame.Score2;
+            if (siteGame.PlayByPlay != null) {
+                liveDatas[LID][GID].Status = getStatus(siteGame.PlayByPlay);
+            }
+        }
+        const site: ISite = liveDatas[LID][GID].Site
+        site[siteGame.Site] = getOdds(siteGame)
+        liveDatas[LID][GID].Site = site
+    })
+    vuex.dispatch("Live/SetGameDatas", liveDatas)
+}
+
+const getStatus = (playByPlay: Array<IWSPlayByPlay>) => {
+    const status: IStatus = {}
+    playByPlay.forEach((item: IWSPlayByPlay) => {
+        status[item.Key] = item.Value
+    })
+    return status
+}
+
+const getOdds = (siteItem: IWSLiveData) => {
+    const siteData: IOdds = {
+        "ID": siteItem.GameID,
+        "HA": {},
+        "1X2": {},
+        "OU": {},
+    };
+    siteItem.Odds.forEach((oddItem: IWSOdds) => {
+        if (oddItem.PlayMode.includes("OU")) {
+            siteData['OU'] = getWSOU(oddItem)
+        } else if (oddItem.PlayMode.includes("HA")) {
+            const { HA, X } = getWSHA(oddItem);
+            siteData['HA'] = HA
+            siteData['1X2'] = X
+        }
+    });
+    return siteData
+}
+
+
+const getWSOU = (ou: IWSOdds) => {
+    const ouData: IOdd = {};
+    ou.Prices.forEach((priceItem: IWSPrices) => {
+        if (priceItem.Main) {
+            ouData['spread'] = `o${priceItem.Spread}`
+            priceItem.Odds.forEach((oddItem: IWSOddInfo) => {
+                if (oddItem.OddType == "O") {
+                    ouData['o'] = oddItem.Odd
+                } else if (oddItem.OddType == "U") {
+                    ouData['u'] = oddItem.Odd
+                }
+            });
+        }
+    });
+    return ouData;
+}
+
+const getWSHA = (ha: IWSOdds) => {
+    const haData: IDict<IOdd> = { HA: {}, X: {} };
+    ha.Prices.forEach((priceItem: IWSPrices) => {
+        if (priceItem.Main) {
+            if (priceItem.Spread == "1X2") {
+                haData["X"]["spread"] = priceItem.Spread
+                priceItem.Odds.forEach((oddItem: IWSOddInfo) => {
+                    if (oddItem.OddType == "1") {
+                        haData["X"]['h'] = oddItem.Odd
+                    } else if (oddItem.OddType == "2") {
+                        haData["X"]['a'] = oddItem.Odd
+                    }
+                });
+            } else {
+                haData["HA"]["spread"] = priceItem.Spread
+                priceItem.Odds.forEach((oddItem: IWSOddInfo) => {
+                    if (oddItem.OddType == "1") {
+                        haData["HA"]['h'] = oddItem.Odd
+                    } else if (oddItem.OddType == "2") {
+                        haData["HA"]['a'] = oddItem.Odd
                     }
                 });
             }

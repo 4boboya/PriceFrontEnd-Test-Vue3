@@ -1,7 +1,8 @@
-import { IHotGame, IGame, IResApiGame, ISiteGameDtos, ITidyHotGameDataRes } from "@/type/Live"
+import { IHotGame, IGame, IResApiGame, ISiteGameDtos } from "@/type/Game"
 import { IStringDict } from "@/type/Global"
+import vuex from "@/store"
 
-export const tidyData = (gameDtos: Array<IResApiGame>): ITidyHotGameDataRes => {
+export const tidyData = (gameDtos: Array<IResApiGame>) => {
     const hotGames: IHotGame = {};
     const gameMapping: IStringDict = {};
     gameDtos.forEach((item: IResApiGame) => {
@@ -21,5 +22,6 @@ export const tidyData = (gameDtos: Array<IResApiGame>): ITidyHotGameDataRes => {
             }
         })
     })
-    return { hotGames: hotGames, gameMapping: gameMapping }
+    vuex.dispatch("HotGame/SetHotGames", hotGames) 
+    vuex.dispatch("HotGame/SetSiteGameMapping", gameMapping)
 }

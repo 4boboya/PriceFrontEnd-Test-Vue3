@@ -66,7 +66,7 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, defineAsyncComponent, ref, provide, watch } from "vue";
+import { computed, defineComponent, defineAsyncComponent, ref, provide } from "vue";
 import { useStore } from "vuex";
 import { TFunc, TInputFunc } from "@/type/Global"
 import { UseEraserFunc, UsePenFunc, UseFontFunc, ChangeColorFunc, ChangeSizeFunc} from "@/symbols/Home"

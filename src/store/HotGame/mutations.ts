@@ -1,6 +1,6 @@
 import { MutationTree } from "vuex"
 import { TState } from "./state"
-import { IHotGame } from "@/type/Live"
+import { IHotGame } from "@/type/Game"
 import { IStringDict } from "@/type/Global"
 
 export const enum MutauionType {
