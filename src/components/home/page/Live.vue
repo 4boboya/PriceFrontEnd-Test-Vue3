@@ -122,8 +122,7 @@ canvas {
 import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue'
 import { useStore } from "vuex"
 import { LiveGame } from "@/api/home"
-import { IGameData } from "@/type/Live"
-import { IStringDict } from "@/type/Global"
+import { IGameData, ITidyDataRes } from "@/type/Live"
 import { tidyData } from "@/library/Live/ApiData"
 import mitt from "@/library/global/Mitt"
 import html2canvas from "html2canvas";
@@ -142,7 +141,7 @@ export default defineComponent({
     const getLiveData = async () => {
       store.dispatch("Live/SetGameDatas", {} as IGameData)
       await LiveGame({gameType: GameType.value}).then((res) => {
-        const { liveDatas, leagueMappintg, gameMappintg } = tidyData(res.gameLiveDtos) as { liveDatas: IGameData; leagueMappintg: IStringDict; gameMappintg: IStringDict }
+        const { liveDatas, leagueMappintg, gameMappintg } = tidyData(res.gameLiveDtos) as ITidyDataRes
         store.dispatch("Live/SetGameDatas", liveDatas)
         store.dispatch("Live/SetSiteLeagueMapping", leagueMappintg)
         store.dispatch("Live/SetSiteGameMapping", gameMappintg)

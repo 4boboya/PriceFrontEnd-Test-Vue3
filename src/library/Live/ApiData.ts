@@ -1,4 +1,4 @@
-import { IGameData, ILeague, IGame, IOdds, IOdd, ISiteOdds, IResApiLiveGame, ISiteGameDtos, ISitePrices, ISiteOddInfo } from "@/type/Live"
+import { IGameData, ILeague, IGame, IOdds, IOdd, ISiteOdds, IResApiLiveGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, ITidyDataRes } from "@/type/Live"
 import { IDict, IStringDict } from "@/type/Global"
 
 const siteModel = {
@@ -10,7 +10,7 @@ const siteModel = {
   "pinnacle.com": {},
 }
 
-export const tidyData = (liveDtos: Array<IResApiLiveGame>) => {
+export const tidyData = (liveDtos: Array<IResApiLiveGame>): ITidyDataRes => {
     const liveDatas = {} as IGameData
     let leagueMappintg = {} as IStringDict
     let gameMappintg = {} as IStringDict

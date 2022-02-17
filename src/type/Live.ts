@@ -1,3 +1,5 @@
+import { IStringDict } from "./Global"
+
 export interface IGameData {
     [name: string]: ILeague
 }
@@ -97,4 +99,10 @@ export interface ISitePrices {
 export interface ISiteOddInfo {
     odd: number
     oddType: string
+}
+
+export interface ITidyDataRes {
+    liveDatas: IGameData
+    leagueMappintg: IStringDict
+    gameMappintg: IStringDict
 }
