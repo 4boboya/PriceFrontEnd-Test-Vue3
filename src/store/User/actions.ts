@@ -1,7 +1,8 @@
 import { ActionContext, ActionTree } from "vuex"
 import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
-import { IUserInfo, IWallet, IUser } from "@/type/Vuex"
+import { IUserInfo, IWallet, IInputUser } from "@/type/Vuex"
+import DateLibrary from "@/library/global/Date"
 
 const enum ActionType {
     SetStatus = "SetStatus",
@@ -16,7 +17,7 @@ type TActions = {
     [ActionType.SetFinger](context: ActionAugments, finger: string): void
     [ActionType.SetUserInfo](context: ActionAugments, user: IUserInfo): void
     [ActionType.SetWallet](context: ActionAugments, wallet: IWallet): void
-    [ActionType.SetUser](context: ActionAugments, user: IUser): void
+    [ActionType.SetUser](context: ActionAugments, user: IInputUser): void
 }
 
 type ActionAugments = Omit<ActionContext<TState, TState>, 'commit'> & {
@@ -42,16 +43,20 @@ export const actions: ActionTree<TState, TState> & TActions = {
     },
     [ActionType.SetUser]({ commit }, user) {
         const userInfo = {
-            Account: user.Account,
-            Password: user.Password,
-            AddTime: user.AddTime,
-            Rank: user.Rank,
-            Token: user.Token,
-            Name: user.Name,
-            Site: user.Site,
-            AuthKey: user.AuthKey,
+            Account: user.account,
+            Password: user.password,
+            AddTime: user.addTime,
+            Rank: user.rank,
+            Token: user.token,
+            Name: user.userName,
+            Site: user.site,
+            AuthKey: user.authKey,
         } as IUserInfo
+        const wallet = {
+            Point: user.wallet.point,
+            Subscriber: DateLibrary.UnixToDate(user.wallet.endTime * 1000)
+        } as IWallet
         commit(MutauionType.SetUserInfo, userInfo)
-        commit(MutauionType.SetWallet, user.IWallet)
+        commit(MutauionType.SetWallet, wallet)
     }
 }

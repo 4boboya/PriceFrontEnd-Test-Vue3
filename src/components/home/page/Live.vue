@@ -119,10 +119,10 @@ canvas {
 </style>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, ref, watch, getCurrentInstance, ComponentInternalInstance  } from 'vue'
+import { computed, defineAsyncComponent, defineComponent, ref, watch } from 'vue'
 import { useStore } from "vuex"
 import { LiveGame } from "@/api/home"
-import { IGameData, ITidyDataRes } from "@/type/Game"
+import { IGameData } from "@/type/Game"
 import { tidyApiData, tidyWSData } from "@/library/Live/TidyData"
 import mitt from "@/library/global/Mitt"
 import Websocket from "@/library/global/Websocket"
@@ -134,7 +134,6 @@ export default defineComponent({
     LiveCanvas: defineAsyncComponent(() => import("./LiveCanvas.vue")),
   },
   setup() {
-    const { proxy } = getCurrentInstance() as ComponentInternalInstance 
     const store = useStore();
     const thisDoc = ref<HTMLElement>();
     const wsLive = new Websocket();

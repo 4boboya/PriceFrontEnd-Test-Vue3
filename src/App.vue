@@ -10,6 +10,7 @@
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import mitt from "@/library/global/Mitt";
+import Finger from "@/library/global/Finger";
 export default defineComponent({
   setup() {
     const store = useStore();
@@ -22,6 +23,7 @@ export default defineComponent({
       mitt.emit("close");
     };
 
+    Finger.Create();
     window.addEventListener("resize", setWidth);
     setWidth();
 

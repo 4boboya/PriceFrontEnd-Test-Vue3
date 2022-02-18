@@ -12,7 +12,7 @@ const siteModel = {
   "pinnacle.com": {} as IOdds,
 } as ISite
 
-export const tidyApiData = (liveDtos: Array<IResApiGame>) => {
+export const tidyApiData = (liveDtos: Array<IResApiGame>): void => {
     const liveDatas: IGameData = {}
     let leagueMapping: IStringDict = {}
     let gameMapping: IStringDict = {}
@@ -121,7 +121,7 @@ const getHA = (ha: ISiteOdds) => {
     return haData;
 }
 
-export const tidyWSData = (wsDataStr: string) => {
+export const tidyWSData = (wsDataStr: string): void => {
     // console.log(wsDataStr)
     if (wsDataStr.includes('DeCompress Error')) return
     const leagueMapping = vuex.getters["Live/GetSiteLeagueMapping"]

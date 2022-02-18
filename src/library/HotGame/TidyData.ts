@@ -2,7 +2,7 @@ import { IHotGame, IGame, IResApiGame, ISiteGameDtos } from "@/type/Game"
 import { IStringDict } from "@/type/Global"
 import vuex from "@/store"
 
-export const tidyData = (gameDtos: Array<IResApiGame>) => {
+export const tidyData = (gameDtos: Array<IResApiGame>): void => {
     const hotGames: IHotGame = {};
     const gameMapping: IStringDict = {};
     gameDtos.forEach((item: IResApiGame) => {

@@ -4,7 +4,7 @@ import Pako from "pako"
 export default class Websocket {
     ConnectionObject: signalR.HubConnection | null = null;
     static ResponseMsg = new String();
-    ConnectHub(url: string, group: string, type: string, key: string) {
+    ConnectHub(url: string, group: string, type: string, key: string): void {
         //建立設定
         this.ConnectionObject = new signalR.HubConnectionBuilder()
             .withUrl(url)
@@ -28,13 +28,13 @@ export default class Websocket {
                 return console.error(err.toString());
             });
     }
-    onReceiveMessage(result: string) {
+    onReceiveMessage(result: string): void {
         Websocket.DeCompress(result);
     }
-    DeConnection() {
+    DeConnection(): void {
         if (this.ConnectionObject != null) this.ConnectionObject.stop();
     }
-    static DeCompress(message: string) {
+    static DeCompress(message: string): void {
         //Step1.解Base64編碼
         const strData = atob(message);
         //Step2.將base64字串切割為binnary array

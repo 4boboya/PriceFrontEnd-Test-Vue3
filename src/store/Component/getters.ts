@@ -11,7 +11,7 @@ type Getters = {
 
 export const getters: GetterTree<TState, TState> & Getters = {
     GetSingin(state) {
-        return {component: state.SinginComponent, status: state.ISingin}
+        return {component: state.SinginComponent, status: state.Singin}
     },
     GetMemo(state) {
         return state.Memo

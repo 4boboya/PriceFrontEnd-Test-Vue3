@@ -16,9 +16,25 @@ export interface IUserInfo {
 
 export interface IWallet {
     Point: number,
-    Subscriber: number,
+    Subscriber: string,
 }
 
-export interface IUser extends IUserInfo {
-    IWallet: IWallet
+export interface IInputUserInfo {
+    account: string,
+    password: string | null,
+    addTime: string | null,
+    rank: number,
+    token: string,
+    userName: string,
+    site: string,
+    authKey: string,
+}
+
+export interface IInputWallet {
+    point: number,
+    endTime: number,
+}
+
+export interface IInputUser extends IInputUserInfo {
+    wallet: IInputWallet
 }

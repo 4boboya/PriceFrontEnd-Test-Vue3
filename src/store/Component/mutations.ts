@@ -20,7 +20,7 @@ export const mutations: MutationTree<TState> & TMutations = {
         state.SinginComponent = component
     },
     [MutauionType.SetSingin](state, status) {
-        state.ISingin = status
+        state.Singin = status
     },
     [MutauionType.SetMemo](state, status) {
         state.Memo = status

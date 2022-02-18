@@ -23,6 +23,6 @@ export const state: TState = {
     },
     IWallet: {
         Point: 0,
-        Subscriber: 0,
+        Subscriber: "",
     },
 }

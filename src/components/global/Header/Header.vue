@@ -45,14 +45,15 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex"
 import { HeaderControl } from "@/config/application/HeaderControl";
 import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore()
-    const Status = computed(() => { return store.getters['User/Status']})
+    const Status = computed(() => { return store.getters['User/GetStatus']})
+    const User = computed(() => { return store.getters['User/GetUserInfo']})
     let show = ref<boolean> (false);
     let currentControl = ref<string> ("");
 
@@ -74,7 +75,12 @@ export default defineComponent({
 
     mitt.on("close", closeSubControl)
 
-    return { HeaderControl, Status, show, currentControl, openSubControl, closeSubControl, login };
+    watch(
+      () => { return Status },
+      () => { console.log(Status) }
+    )
+
+    return { HeaderControl, Status, User, show, currentControl, openSubControl, closeSubControl, login };
   },
 });
 </script>

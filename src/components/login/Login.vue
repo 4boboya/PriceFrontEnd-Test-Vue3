@@ -36,12 +36,14 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import { ILoginData } from "@/type/Login"
+import { defineComponent, reactive, computed } from "vue";
 import { useStore } from "vuex"
+import { Login } from "@/api/user"
+import { ILoginData } from "@/type/Login"
 export default defineComponent({
   setup() {
     const store = useStore()
+    const finger = computed(() => { return store.getters["User/GetFinger"]})
     let loginData = reactive({} as ILoginData)
 
     const register = () => {
@@ -50,8 +52,17 @@ export default defineComponent({
     const forget = () => {
       store.dispatch("Component/SetSingin", {status: true, component: "Forget"})
     }
-    const login = () => {
-      console.log(loginData)
+    const login = async () => {
+      loginData.finger = finger.value
+      await Login(loginData).then((res) => {
+        if (res?.code == 10200) {
+          store.dispatch("User/SetUser", res)
+          store.dispatch("User/SetStatus", true)
+          store.dispatch("Component/CloseSingin", false)
+        } else {
+          console.log("登入失敗")
+        }
+      })
     }
     return { loginData, register, forget, login };
   },

@@ -95,7 +95,7 @@
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex"
 import { HotGame } from "@/api/home"
-import { tidyData } from "@/library/HotGame/ApiData"
+import { tidyData } from "@/library/HotGame/TidyData"
 export default defineComponent({
   setup() {
     const store = useStore()

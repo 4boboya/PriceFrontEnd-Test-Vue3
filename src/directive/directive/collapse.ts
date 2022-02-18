@@ -1,8 +1,8 @@
-import { App } from "vue"
+import { App, DirectiveBinding } from "vue"
 
-export function CollapseDirective(vue: App) {
+export function CollapseDirective(vue: App): void {
     vue.directive('collapse', {
-        mounted(el: HTMLElement, binding: any) {
+        mounted(el: HTMLElement, binding: DirectiveBinding) {
             const colContent = document.getElementById(`col_${binding.value}`)
             const colIcon = document.getElementById(`icon_${binding.value}`)
 
