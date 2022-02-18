@@ -22,6 +22,7 @@ app.component('ISingin', Component.ISingin)
 app.component('HotGame', Component.HotGame)
 app.component('Footer', Component.Footer)
 app.component('Chat', Component.Chat)
+app.component('SideBar', Component.SideBar)
 
 Directive(app)
 

@@ -1,6 +1,7 @@
 <template>
   <div @click="closeAll">
     <Header />
+    <SideBar />
     <router-view />
     <Chat />
   </div>

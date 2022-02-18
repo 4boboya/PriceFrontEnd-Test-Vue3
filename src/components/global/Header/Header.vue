@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <div class="sidbar-control" @click="SetSideBar(!SideBar)">
+      <div class="sidbar-control" @click="controlSideBar(!SideBar)">
         <icon :icon="['fas', 'align-justify']" class="fa-lg" />
       </div>
       <div class="title">
@@ -54,6 +54,7 @@ export default defineComponent({
     const store = useStore()
     const Status = computed(() => { return store.getters['User/GetStatus']})
     const User = computed(() => { return store.getters['User/GetUserInfo']})
+    const SideBar = computed(() => { return store.getters['Component/GetSideBar']})
     let show = ref<boolean> (false);
     let currentControl = ref<string> ("");
 
@@ -73,6 +74,10 @@ export default defineComponent({
       store.dispatch("Component/SetSingin", {status: true, component: "Login"})
     };
 
+    const controlSideBar = (status: boolean) => {
+      store.dispatch("Component/SetSideBar", status)
+    }
+
     mitt.on("close", closeSubControl)
 
     watch(
@@ -80,7 +85,7 @@ export default defineComponent({
       () => { console.log(Status) }
     )
 
-    return { HeaderControl, Status, User, show, currentControl, openSubControl, closeSubControl, login };
+    return { HeaderControl, Status, User, SideBar, show, currentControl, openSubControl, closeSubControl, login, controlSideBar };
   },
 });
 </script>
