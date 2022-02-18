@@ -116,7 +116,7 @@ export interface ITidyHotGameDataRes {
     gameMapping: IStringDict
 }
 
-export interface IWSLiveData {
+export interface IWSData {
     GameType: string,
     Site: string,
     GameID: string,

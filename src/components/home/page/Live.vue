@@ -126,7 +126,7 @@ import { IGameData } from "@/type/Game"
 import { tidyApiData, tidyWSData } from "@/library/Live/TidyData"
 import mitt from "@/library/global/Mitt"
 import Websocket from "@/library/global/Websocket"
-import { LiveWSConfig } from "@/config/application/Websocket"
+import { WSConfig } from "@/config/application/Websocket"
 import html2canvas from "html2canvas";
 export default defineComponent({
   components: {
@@ -150,7 +150,7 @@ export default defineComponent({
     }
 
     const connectWSLive = () => {
-      wsLive.ConnectHub(LiveWSConfig.url, LiveWSConfig.group, `${GameType.value}_UI`, LiveWSConfig.key);
+      wsLive.ConnectHub(WSConfig.url, WSConfig.group, `${GameType.value}_UI`, WSConfig.key);
       Object.defineProperty(Websocket, 'ResponseMsg', {
           set: (message: string) => {
             tidyWSData(message)

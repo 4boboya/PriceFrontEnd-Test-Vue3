@@ -15,10 +15,14 @@
         <div class="hotgame-league">{{ item.League }}</div>
         <div class="hotgame-team">
           <div :ref="`${item.GameID}`" class="hotgame-team-h">{{ item.TeamH }}</div>
-          <div style="padding-inline: 3px">{{ item.ScoreH }}:{{ item.ScoreA }}</div>
+          <div class="hotgame-score">{{ item.ScoreH }} : {{ item.ScoreA }}</div>
           <div :ref="`${item.GameID}`" class="hotgame-team-a">{{ item.TeamA }}</div>
         </div>
         <div>{{ item.GameDate }} {{ item.GameTime }}</div>
+        <div class="hotgame-analysis">
+          <div>Analysis</div>
+          <div>Prediction</div>
+        </div>
       </div>
     </div>
   </div>
@@ -27,6 +31,9 @@
 <style lang="scss" scoped>
 @mixin hotgame-team-mixin($team) {
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   @if ($team == "H") {
     text-align: left;
   } @else if ($team == "A") {
@@ -56,25 +63,39 @@
 }
 
 .hotgame-card {
-  height: 85px;
+  height: 90px;
   min-width: 300px;
   border-radius: 5px;
   border-left: 2px solid #618730;
   color: #dedede;
   background-color: #343444;
-  padding: 5px 15px;
+  padding: 2.5px 15px;
   box-shadow: 1.5px 1.5px 4px #ffffff45;
   font-size: 13px;
 
   & > div {
     display: flex;
-    height: 33%;
+    height: 25%;
     text-align: center;
     align-items: center;
     justify-content: center;
   }
   & > div.hotgame-team {
     justify-content: space-between;
+
+    .hotgame-score { 
+      white-space: nowrap;
+    }
+  }
+
+  & > div.hotgame-analysis {
+    display: flex;
+    div:nth-child(1) {
+      margin-right: 20px;
+    }
+    div:nth-child(2) {
+      margin-left: 20px;
+    }
   }
 }
 
@@ -95,10 +116,13 @@
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex"
 import { HotGame } from "@/api/home"
-import { tidyData } from "@/library/HotGame/TidyData"
+import { tidyData, tidyWSData } from "@/library/HotGame/TidyData"
+import Websocket from "@/library/global/Websocket"
+import { WSConfig } from "@/config/application/Websocket"
 export default defineComponent({
   setup() {
     const store = useStore()
+    const wsHotGame = new Websocket();
     let hotGameDatas = computed(() => { return store.getters["HotGame/GetHotGames"] });
     let isDown = ref<boolean>(false);
     let start = ref<number>(0);
@@ -110,6 +134,16 @@ export default defineComponent({
         if (res?.gameDtos) {
           tidyData(res.gameDtos)
         }
+      })
+      connectWSHotGame()
+    }
+
+    const connectWSHotGame = () => {
+      wsHotGame.ConnectHub(WSConfig.url, WSConfig.group, "Match_UI", WSConfig.key);
+      Object.defineProperty(Websocket, 'ResponseMsg', {
+          set: (message: string) => {
+            tidyWSData(message)
+          }
       })
     }
 

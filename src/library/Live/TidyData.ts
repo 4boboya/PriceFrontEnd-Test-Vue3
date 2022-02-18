@@ -1,5 +1,5 @@
 import { IGameData, ILeague, IGame, ISite, IOdds, IOdd, ISiteOdds, IResApiGame, ISiteGameDtos, ISitePrices, ISiteOddInfo, IStatus,
-        IWSLiveData, IWSPlayByPlay, IWSOdds, IWSPrices, IWSOddInfo } from "@/type/Game"
+        IWSData, IWSPlayByPlay, IWSOdds, IWSPrices, IWSOddInfo } from "@/type/Game"
 import { IDict, IStringDict } from "@/type/Global"
 import vuex from "@/store"
 
@@ -127,9 +127,9 @@ export const tidyWSData = (wsDataStr: string): void => {
     const leagueMapping = vuex.getters["Live/GetSiteLeagueMapping"]
     const gameMapping = vuex.getters["Live/GetSiteGameMapping"]
     const wsData = JSON.parse(wsDataStr);
-    const siteGames: Array<IWSLiveData> = wsData.SiteGames
-    const liveDatas: IGameData = JSON.parse(JSON.stringify(vuex.getters["Live/GetGameDatas"])) as IGameData
-    siteGames.forEach((siteGame: IWSLiveData) => {
+    const siteGames: Array<IWSData> = wsData.SiteGames
+    const liveDatas: IGameData = vuex.getters["Live/GetGameDatas"] as IGameData
+    siteGames.forEach((siteGame: IWSData) => {
         const LID = leagueMapping[siteGame.GameID]
         const GID = gameMapping[siteGame.GameID]
         if (LID == undefined || GID == undefined) return
@@ -155,7 +155,7 @@ const getStatus = (playByPlay: Array<IWSPlayByPlay>) => {
     return status
 }
 
-const getOdds = (siteItem: IWSLiveData) => {
+const getOdds = (siteItem: IWSData) => {
     const siteData: IOdds = {
         "ID": siteItem.GameID,
         "HA": {},
