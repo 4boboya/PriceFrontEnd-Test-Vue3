@@ -3,6 +3,7 @@ import { TState } from "./state"
 import { MutauionType, TMutations } from "./mutations"
 import { IUserInfo, IWallet, IInputUser } from "@/type/Vuex"
 import DateLibrary from "@/library/global/Date"
+import Cookies from "js-cookie"
 
 const enum ActionType {
     SetStatus = "SetStatus",
@@ -10,6 +11,7 @@ const enum ActionType {
     SetUserInfo = "SetUserInfo",
     SetWallet = "SetWallet",
     SetUser = "SetUser",
+    SetUserFromCookies = "SetUserFromCookies"
 }
 
 type TActions = {
@@ -18,6 +20,7 @@ type TActions = {
     [ActionType.SetUserInfo](context: ActionAugments, user: IUserInfo): void
     [ActionType.SetWallet](context: ActionAugments, wallet: IWallet): void
     [ActionType.SetUser](context: ActionAugments, user: IInputUser): void
+    [ActionType.SetUserFromCookies](context: ActionAugments, user: { userInfo: IUserInfo, wallet: IWallet }): void
 }
 
 type ActionAugments = Omit<ActionContext<TState, TState>, 'commit'> & {
@@ -58,5 +61,11 @@ export const actions: ActionTree<TState, TState> & TActions = {
         } as IWallet
         commit(MutauionType.SetUserInfo, userInfo)
         commit(MutauionType.SetWallet, wallet)
+        Cookies.set('user', JSON.stringify(userInfo))
+        Cookies.set('wallet', JSON.stringify(wallet))
+    },
+    [ActionType.SetUserFromCookies]({ commit }, user) {
+        commit(MutauionType.SetUserInfo, user.userInfo)
+        commit(MutauionType.SetWallet, user.wallet)
     }
 }
