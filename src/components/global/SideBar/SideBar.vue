@@ -4,7 +4,16 @@
     <div class="sidebar" :open="SideBar">
       <div class="login side-item">
         <h3 v-if="!Status" @click="login">Login</h3>
-        <h3 v-else>{{ User.Name }}</h3>
+        <div v-else>
+          <div class="user">
+            <h3 >{{ User.Name }}</h3>
+            <div class="logout" @click="Logout"><icon :icon="['fas', 'right-from-bracket']" /></div>
+          </div>
+          <div class="wallet">
+            <div><icon :icon="['fas', 'coins']" class="fa-lg" /> {{ Wallet.Point }}</div>
+            <div><icon :icon="['fas', 'crown']" class="fa-lg" /> {{ Wallet.Subscriber }}</div>
+          </div>
+        </div>
       </div>
       <hr />
       <div class="side-item"><h4>Experts</h4></div>
@@ -62,21 +71,46 @@
     justify-content: space-between;
   }
 }
+.login {
+  & > div {
+    width: 100%;
+  }
+}
 .sidebar[open="true"] {
   left: 0px;
+}
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logout {
+  padding: 5px;
+}
+.wallet {
+  display: flex;
+  div {
+    min-width: 30%;
+    font-size: 12px;
+    &:nth-child(2) {
+      padding-left: 3px;
+    }
+  }
 }
 </style>
 
 <script lang="ts">
 import { defineComponent, computed, watch } from 'vue'
 import { useStore } from 'vuex'
+import Logout from '@/library/global/Logut'
 export default defineComponent({
   setup() {
     const store = useStore();
-    const Status = computed(() => { return store.getters['User/GetStatus']})
-    const User = computed(() => { return store.getters['User/GetUserInfo']})
-    const SideBar = computed(() => { return store.getters['Component/GetSideBar'] })
-    const Width = computed(() => { return store.getters['Global/GetWidth'] })
+    const Status = computed(() => store.getters['User/GetStatus'])
+    const User = computed(() => store.getters['User/GetUserInfo'])
+    const Wallet = computed(() => store.getters['User/GetWallet'])
+    const SideBar = computed(() => store.getters['Component/GetSideBar'])
+    const Width = computed(() => store.getters['Global/GetWidth'])
 
     const controlSideBar = (status: boolean) => {
       store.dispatch("Component/SetSideBar", status)
@@ -91,7 +125,7 @@ export default defineComponent({
       () => { if (Width.value > 868) controlSideBar(false) }
     )
 
-    return { SideBar, Status, User, controlSideBar, login }
+    return { SideBar, Status, User, Wallet, controlSideBar, login, Logout }
   }
 })
 </script>

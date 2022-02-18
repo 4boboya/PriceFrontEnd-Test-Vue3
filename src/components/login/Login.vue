@@ -43,7 +43,7 @@ import { ILoginData } from "@/type/Login"
 export default defineComponent({
   setup() {
     const store = useStore()
-    const finger = computed(() => { return store.getters["User/GetFinger"]})
+    const finger = computed(() => store.getters["User/GetFinger"])
     let loginData = reactive({} as ILoginData)
 
     const register = () => {

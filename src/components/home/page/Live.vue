@@ -2,9 +2,9 @@
   <div class="live" :ref="el => { thisDoc = el }">
     <LiveCanvas v-if="Memo"/>
     <div>
-      <div v-for="(item, LID) in liveDatas" :key="`oddtable_${LID}`">
-        <div v-collapse:check="`${LID}_${Object.keys(liveDatas).indexOf(LID)}`" class="title">{{ Object.values(item)[0].League }}</div>
-        <div :id="`col_${LID}_${Object.keys(liveDatas).indexOf(LID)}`" class="table-scroll collapse">
+      <div v-for="(item, LID) in LiveDatas" :key="`oddtable_${LID}`">
+        <div v-collapse:check="`${LID}_${Object.keys(LiveDatas).indexOf(LID)}`" class="title">{{ Object.values(item)[0].League }}</div>
+        <div :id="`col_${LID}_${Object.keys(LiveDatas).indexOf(LID)}`" class="table-scroll collapse">
           <div class="div-table">
             <div class="div-tr div-thead">
               <div class="div-td" style="width: 0px; padding-inline: unset"></div>
@@ -137,9 +137,9 @@ export default defineComponent({
     const store = useStore();
     const thisDoc = ref<HTMLElement>();
     const wsLive = new Websocket();
-    let Memo = computed(() => { return store.getters["Component/GetMemo"] });
-    let GameType = computed(() => { return store.getters["Global/GetGameType"] });
-    let liveDatas = ref(computed(() => { return store.getters["Live/GetGameDatas"] }));
+    const Memo = computed(() => store.getters["Component/GetMemo"]);
+    const GameType = computed(() => store.getters["Global/GetGameType"]);
+    const LiveDatas = computed(() => store.getters["Live/GetGameDatas"]);
 
     const getLiveData = async () => {
       store.dispatch("Live/SetGameDatas", {} as IGameData)
@@ -188,7 +188,7 @@ export default defineComponent({
       }
     )
 
-    return { thisDoc, Memo, liveDatas }
+    return { thisDoc, Memo, LiveDatas }
   }
 })
 </script>

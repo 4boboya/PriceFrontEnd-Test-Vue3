@@ -67,7 +67,7 @@ import { useStore } from "vuex";
 export default defineComponent({
   setup() {
     const store = useStore();
-    let Width = computed(() => { return store.getters["Global/GetWidth"]})
+    const Width = computed(() => store.getters["Global/GetWidth"])
 
     return { Width }
   },

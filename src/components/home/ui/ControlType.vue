@@ -87,8 +87,8 @@ import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore();
-    const Width = computed(() => { return store.getters["Global/GetWidth"] });
-    const Memo = computed(() => { return store.getters["Component/GetMemo"]})
+    const Width = computed(() => store.getters["Global/GetWidth"]);
+    const Memo = computed(() => store.getters["Component/GetMemo"])
     let page = inject("page");
     let showList = ref<boolean>(false);
     

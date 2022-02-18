@@ -36,7 +36,7 @@ export default defineComponent({
     const font = ref(inject("font") as boolean);
     const eraser = ref(inject("eraser") as boolean);
     const pen = ref(inject("pen") as boolean);
-    let Memo = computed(() => { return store.getters["Component/GetMemo"] });
+    const Memo = computed(() => store.getters["Component/GetMemo"]);
     let canvas = ref<HTMLCanvasElement>();
     let canvasInput = ref<HTMLInputElement>();
     let ctx = ref<CanvasRenderingContext2D>();

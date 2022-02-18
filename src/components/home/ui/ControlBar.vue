@@ -33,7 +33,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const Width = computed(() => { return store.getters["Global/GetWidth"]})
+    const Width = computed(() => store.getters["Global/GetWidth"])
 
     return { Width }
   }

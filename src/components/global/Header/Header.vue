@@ -52,9 +52,10 @@ import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore()
-    const Status = computed(() => { return store.getters['User/GetStatus']})
-    const User = computed(() => { return store.getters['User/GetUserInfo']})
-    const SideBar = computed(() => { return store.getters['Component/GetSideBar']})
+    const Status = computed(() => store.getters['User/GetStatus'])
+    const User = computed(() => store.getters['User/GetUserInfo'])
+    const SideBar = computed(() => store.getters['Component/GetSideBar'])
+    const Width = computed(() => store.getters["Global/GetWidth"]);
     let show = ref<boolean> (false);
     let currentControl = ref<string> ("");
 
@@ -83,6 +84,11 @@ export default defineComponent({
     watch(
       () => { return Status },
       () => { console.log(Status) }
+    )
+
+    watch(
+      () => { return Width.value },
+      () => { if (Width.value < 868) closeSubControl() }
     )
 
     return { HeaderControl, Status, User, SideBar, show, currentControl, openSubControl, closeSubControl, login, controlSideBar };

@@ -39,7 +39,7 @@ import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore();
-    let Memo = computed(() => { return store.getters["Component/GetMemo"] });
+    const Memo = computed(() => store.getters["Component/GetMemo"]);
     let showGameTypeList = ref<boolean>(false);
     let gameType = ref<string>("BasketBall");
 

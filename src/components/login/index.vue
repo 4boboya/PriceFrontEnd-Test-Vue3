@@ -24,7 +24,7 @@ export default defineComponent({
     },
     setup() {
         const store = useStore()
-        let singin = computed(() => store.getters["Component/GetSingin"])
+        const singin = computed(() => store.getters["Component/GetSingin"])
 
         const close = () => {
             store.dispatch("Component/SetSingin", { status: false })

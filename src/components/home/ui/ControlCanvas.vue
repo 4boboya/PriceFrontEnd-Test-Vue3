@@ -91,7 +91,7 @@ import mitt from "@/library/global/Mitt"
 export default defineComponent({
   setup() {
     const store = useStore();
-    const Memo = computed(() => { return store.getters["Component/GetMemo"]})
+    const Memo = computed(() => store.getters["Component/GetMemo"])
     const color = inject("color") as string;
     const size = inject("size") as number;
     const font = inject("font") as boolean;

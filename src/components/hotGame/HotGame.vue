@@ -123,7 +123,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const wsHotGame = new Websocket();
-    let hotGameDatas = computed(() => { return store.getters["HotGame/GetHotGames"] });
+    const hotGameDatas = computed(() => store.getters["HotGame/GetHotGames"]);
     let isDown = ref<boolean>(false);
     let start = ref<number>(0);
     let carousel =ref<HTMLElement>();
