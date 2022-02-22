@@ -20,7 +20,7 @@
       </div>
       <div class="login-content">
         <h2 v-if="!Status" class="login" @click="login()">Login</h2>
-        <h2 v-else class="user">
+        <h2 v-else class="user" @click.stop="controlUser(!showUser)">
           {{ User.Name }} <icon :icon="['fas', 'angle-down']" />
         </h2>
       </div>
@@ -37,6 +37,21 @@
         </div>
       </div>
     </transition>
+    <transition name="sub">
+      <div v-if="showUser" class="user-control" @click.stop="">
+        <div class="control-content">
+          <div class="wallet">
+            <div class="uesr-link"><icon :icon="['fas', 'coins']" class="fa-lg" /> {{ Wallet.Point }}</div>
+            <div class="uesr-link"><icon :icon="['fas', 'crown']" class="fa-lg" /> {{ Wallet.Subscriber }}</div>
+          </div>
+          <hr />
+          <div class="uesr-link">Order History</div>
+          <div class="uesr-link">Auto Notifications</div>
+          <div class="uesr-link">Become an Export</div>
+          <div class="uesr-link" @click="logout">Log Out</div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -49,15 +64,18 @@ import { computed, defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex"
 import { HeaderControl } from "@/config/application/HeaderControl";
 import mitt from "@/library/global/Mitt"
+import Logout from '@/library/global/Logut'
 export default defineComponent({
   setup() {
     const store = useStore()
     const Status = computed(() => store.getters['User/GetStatus'])
     const User = computed(() => store.getters['User/GetUserInfo'])
+    const Wallet = computed(() => store.getters['User/GetWallet'])
     const SideBar = computed(() => store.getters['Component/GetSideBar'])
     const Width = computed(() => store.getters["Global/GetWidth"]);
-    let show = ref<boolean> (false);
-    let currentControl = ref<string> ("");
+    let show = ref<boolean>(false);
+    let showUser = ref<boolean>(false);
+    let currentControl = ref<string>("");
 
     const openSubControl = (control: string) => {
       if (control == currentControl.value) {
@@ -79,7 +97,16 @@ export default defineComponent({
       store.dispatch("Component/SetSideBar", status)
     }
 
-    mitt.on("close", closeSubControl)
+    const controlUser = (status: boolean) => {
+      showUser.value = status
+    }
+
+    const logout = () => {
+      controlUser(false)
+      Logout()
+    }
+
+    mitt.on("close", () => {closeSubControl(); controlUser(false)})
 
     watch(
       () => { return Status },
@@ -91,7 +118,7 @@ export default defineComponent({
       () => { if (Width.value < 868) closeSubControl() }
     )
 
-    return { HeaderControl, Status, User, SideBar, show, currentControl, openSubControl, closeSubControl, login, controlSideBar };
+    return { HeaderControl, Status, User, Wallet, SideBar, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout };
   },
 });
 </script>
