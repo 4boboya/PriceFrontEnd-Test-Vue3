@@ -8,18 +8,20 @@
         <h2>ZBDigital</h2>
       </div>
       <div class="control">
-        <div>Best Experts</div>
+        <div>{{ t("Header.BestExperts") }}</div>
         <span>|</span>
-        <div>Today’s Best Deals</div>
+        <div>{{ t("Header.BestDeals") }}</div>
         <span>|</span>
-        <div>Promotions</div>
+        <div>{{ t("Header.Promotions") }}</div>
         <span>|</span>
-        <div @click.stop="openSubControl('Feeback')">Feeback</div>
+        <div @click.stop="openSubControl('Feeback')">{{ t("Header.Feeback") }}</div>
         <span>|</span>
-        <div @click.stop="openSubControl('Customer')">Customer Services</div>
+        <div @click.stop="openSubControl('Customer')">{{ t("Header.Customer") }}</div>
+        <span>|</span>
+        <div @click.stop="openSubControl('Language')">{{ t("Header.Language") }}</div>
       </div>
       <div class="login-content">
-        <h2 v-if="!Status" class="login" @click="login()">Login</h2>
+        <h2 v-if="!Status" class="login" @click="login()">{{ t("Header.Login") }}</h2>
         <h2 v-else class="user" @click.stop="controlUser(!showUser)">
           {{ User.Name }} <icon :icon="['fas', 'angle-down']" />
         </h2>
@@ -28,7 +30,7 @@
     <transition name="sub">
       <div v-if="show" class="sub-control" @click.stop="">
         <div class="control-content">
-          <div v-for="item in HeaderControl[currentControl]" :key="item">
+          <div v-for="item in Object.keys(HeaderControl[currentControl])" :key="item" @click="clickSubItem(HeaderControl[currentControl][item])">
             {{ item }}
           </div>
         </div>
@@ -62,12 +64,14 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex"
+import { useI18n } from "vue-i18n";
 import { HeaderControl } from "@/config/application/HeaderControl";
 import mitt from "@/library/global/Mitt"
 import Logout from '@/library/global/Logut'
 export default defineComponent({
   setup() {
     const store = useStore()
+    const { t, locale } = useI18n()
     const Status = computed(() => store.getters['User/GetStatus'])
     const User = computed(() => store.getters['User/GetUserInfo'])
     const Wallet = computed(() => store.getters['User/GetWallet'])
@@ -106,6 +110,21 @@ export default defineComponent({
       Logout()
     }
 
+    const clickSubItem = (event: string) => {
+      console.log(event)
+      switch (currentControl.value) {
+        case "Language":
+          locale.value = event;
+          break;
+        case "Customer":
+          console.log(`link: ${event}`);
+          break;
+        case "Feeback":
+          console.log(`link: ${event}`);
+          break;
+      }
+    }
+
     mitt.on("close", () => {closeSubControl(); controlUser(false)})
 
     watch(
@@ -118,7 +137,7 @@ export default defineComponent({
       () => { if (Width.value < 868) closeSubControl() }
     )
 
-    return { HeaderControl, Status, User, Wallet, SideBar, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout };
+    return { HeaderControl, Status, User, Wallet, SideBar, t, locale, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout, clickSubItem };
   },
 });
 </script>

@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import i18n from './i18n'
 import Component from "./components"
 import './styles/app.scss'
 import Directive from './directive'
@@ -14,7 +15,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(fas, far, fab)
 
-const app = createApp(App).use(store).use(router)
+const app = createApp(App).use(store).use(router).use(i18n)
 
 app.component('icon', FontAwesomeIcon)
 app.component('Header', Component.Header)

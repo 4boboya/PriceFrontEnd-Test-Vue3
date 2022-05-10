@@ -1,3 +1,5 @@
+import { IDict } from "./Global"
+
 export interface IHeaderControl {
-    [name: string]: Array<string>;
+    [name: string]: IDict<string>;
 }
