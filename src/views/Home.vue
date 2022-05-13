@@ -14,7 +14,6 @@
           <div class="content-data">
             <Live v-if="page == 'Live'"/>
           </div>
-          <Footer />
         </div>
       </div>
     </div>

@@ -9,6 +9,12 @@ const Thth: IDict<IDict<string>> = {
         "Customer": "การบริการลูกค้า",
         "Language": "ภาษา",
         "Login": "เข้าสู่ระบบ",
+        "Info": "ข้อมูลส่วนบุคคล",
+        "Rank": "จุดชมวิว",
+        "Order": "ประวัติการสั่งซื้อ",
+        "Notifications": "การแจ้งเตือนอัตโนมัติ",
+        "Export": "เป็นผู้เชี่ยวชาญ",
+        "LogOut": "ออกจากระบบ",
     },
     Home: {
         "Live": "สด",
@@ -45,6 +51,14 @@ const Thth: IDict<IDict<string>> = {
         "About": "เกี่ยวกับ",
         "Us": "เรา",
     },
+    User: {
+        "Info": "ข้อมูลส่วนบุคคล",
+        "Order": "ข้อมูลการสั่งซื้อ",
+        "BuyRecord": "บันทึกการซื้อ",
+        "StoreRecord": "บันทึกมูลค่าที่เก็บไว้",
+        "ChangeUserName": "เปลี่ยนชื่อ",
+        "ChangePassword": "เปลี่ยนรหัสผ่าน",
+    }
 }
 
 export default Thth

@@ -5,7 +5,7 @@
         <icon :icon="['fas', 'align-justify']" class="fa-lg" />
       </div>
       <div class="title">
-        <h2>ZBDigital</h2>
+        <h2 @click="toHome">ZBDigital</h2>
       </div>
       <div class="control">
         <div>{{ t("Header.BestExperts") }}</div>
@@ -23,7 +23,7 @@
       <div class="login-content">
         <h2 v-if="!Status" class="login" @click="login()">{{ t("Header.Login") }}</h2>
         <h2 v-else class="user" @click.stop="controlUser(!showUser)">
-          {{ User.Name }} <icon :icon="['fas', 'angle-down']" />
+          {{ User.Name }} <icon :icon="['fas', 'caret-down']" class="fa-xs" />
         </h2>
       </div>
     </div>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </transition>
-    <transition name="sub">
+    <transition name="usercontrol">
       <div v-if="showUser" class="user-control" @click.stop="">
         <div class="control-content">
           <div class="wallet">
@@ -47,10 +47,9 @@
             <div class="uesr-link"><icon :icon="['fas', 'crown']" class="fa-lg" /> {{ Wallet.Subscriber }}</div>
           </div>
           <hr />
-          <div class="uesr-link">Order History</div>
-          <div class="uesr-link">Auto Notifications</div>
-          <div class="uesr-link">Become an Export</div>
-          <div class="uesr-link" @click="logout">Log Out</div>
+          <div v-for="item in UserControl" :key="item.key" class="uesr-link" @click="uesrControl(item.link)">
+            {{ t(item.name) }}
+          </div>
         </div>
       </div>
     </transition>
@@ -64,13 +63,15 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useStore } from "vuex"
+import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
-import { HeaderControl } from "@/config/application/HeaderControl";
+import { HeaderControl, UserControl } from "@/config/application/HeaderControl";
 import mitt from "@/library/global/Mitt"
 import Logout from '@/library/global/Logut'
 export default defineComponent({
   setup() {
     const store = useStore()
+    const router = useRouter()
     const { t, locale } = useI18n()
     const Status = computed(() => store.getters['User/GetStatus'])
     const User = computed(() => store.getters['User/GetUserInfo'])
@@ -124,6 +125,16 @@ export default defineComponent({
       }
     }
 
+    const uesrControl = (action: string) => {
+      if (action == 'LogOut') logout()
+      else router.push(action)
+      controlUser(false)
+    }
+
+    const toHome = () => {
+      router.push("/")
+    }
+
     mitt.on("close", () => {closeSubControl(); controlUser(false)})
 
     watch(
@@ -136,7 +147,7 @@ export default defineComponent({
       () => { if (Width.value < 868) closeSubControl() }
     )
 
-    return { HeaderControl, Status, User, Wallet, SideBar, t, locale, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout, clickSubItem };
+    return { HeaderControl, UserControl, Status, User, Wallet, SideBar, t, locale, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout, clickSubItem, uesrControl, toHome };
   },
 });
 </script>

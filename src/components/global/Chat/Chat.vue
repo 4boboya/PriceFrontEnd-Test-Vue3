@@ -29,14 +29,14 @@
 
   .chat-title {
     cursor: default;
-    background-color: #7e0234;
+    background-color: var(--minor-color);
     opacity: 0.7;
     height: 35px;
     width: 200px;
     line-height: 35px;
     padding-inline: 30px;
     font-weight: bold;
-    color: #dedede;
+    color: var(--main-font);
     transition: opacity 0.2s ease;
 
     &:hover {
@@ -57,7 +57,7 @@
 
   .chat-message {
     height: 300px;
-    color: #dedede;
+    color: var(--main-font);
   }
 
   textarea {
@@ -67,7 +67,7 @@
     border-radius: 5px;
     padding-right: 45px;
     background-color: #ffffff10;
-    color: #dedede;
+    color: var(--main-font);
   }
 
   .submit {
@@ -76,7 +76,7 @@
     right: 10px;
     bottom: 30px;
     background-color: transparent;
-    color: #618730;
+    color: var(--minor-font);
     outline: unset;
     border: unset;
     padding: 5px;
@@ -97,14 +97,14 @@
 
 .chat[show="true"] {
   bottom: 10px;
-  box-shadow: 1.5px 1.5px 15px #ffffff45;
+  box-shadow: 1.5px 1.5px 15px var(--main-shadow);
 
   .chat-title {
     opacity: 1;
   }
   .chat-content {
     height: 400px;
-    background-color: #0f1110;
+    background-color: var(--bg-color);;
   }
 }
 </style>

@@ -9,6 +9,12 @@ const Zhtw: IDict<IDict<string>> = {
         "Customer": "客戶服務",
         "Language": "語系",
         "Login": "登入",
+        "Info": "個人資料",
+        "Rank": "查看積分",
+        "Order": "訂單歷史",
+        "Notifications": "自動通知",
+        "Export": "成為專家",
+        "LogOut": "登出",
     },
     Home: {
         "Live": "實況",
@@ -45,6 +51,14 @@ const Zhtw: IDict<IDict<string>> = {
         "About": "關於",
         "Us": "我們",
     },
+    User: {
+        "Info": "個人資料",
+        "Order": "訂單資訊",
+        "BuyRecord": "購買紀錄",
+        "StoreRecord": "儲值紀錄",
+        "ChangeUserName": "變更名稱",
+        "ChangePassword": "變更密碼",
+    }
 }
 
 export default Zhtw

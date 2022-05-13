@@ -11,7 +11,7 @@
 <style lang="scss" scoped>
 .control-bar {
   position: relative;
-  background-color: #7e0234;
+  background-color: var(--minor-color);
   height: 40px;
   display: flex;
   justify-content: space-between;

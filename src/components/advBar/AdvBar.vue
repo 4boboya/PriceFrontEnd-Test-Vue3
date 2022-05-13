@@ -38,6 +38,6 @@
 .fake-img {
   width: 170px;
   height: 140px;
-  background-color: #c4c4c4;
+  background-color: var(--non-img);
 }
 </style>

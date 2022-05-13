@@ -9,6 +9,12 @@ const Jajp: IDict<IDict<string>> = {
         "Customer": "顧客サービス",
         "Language": "言語",
         "Login": "ログインする",
+        "Info": "個人情報",
+        "Rank": "ビューポイント",
+        "Order": "注文履歴",
+        "Notifications": "自動通知",
+        "Export": "エキスパートになる",
+        "LogOut": "サインアウト",
     },
     Home: {
         "Live": "住む",
@@ -45,6 +51,14 @@ const Jajp: IDict<IDict<string>> = {
         "About": "約",
         "Us": "我ら",
     },
+    User: {
+        "Info": "個人情報",
+        "Order": "注文情報",
+        "BuyRecord": "購入記録",
+        "StoreRecord": "プリペイドレコード",
+        "ChangeUserName": "名前を変更する",
+        "ChangePassword": "パスワードを変更する",
+    }
 }
 
 export default Jajp

@@ -3,6 +3,7 @@
     <Header />
     <SideBar />
     <router-view />
+    <Footer />
     <Chat />
   </div>
 </template>

@@ -13,6 +13,22 @@
     }
 }
 
+.usercontrol-enter-active {
+    animation: usercontrol-control 0.5s;
+}
+.usercontrol-leave-active {
+    animation: usercontrol-control 0.5s reverse;
+}
+@keyframes usercontrol-control {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 240px;
+    }
+}
+
+
 .gametype-enter-active {
     animation: gametype-control 0.3s;
 }

@@ -9,6 +9,12 @@ const Enus: IDict<IDict<string>> = {
         "Customer": "Customer Services",
         "Language": "Language",
         "Login": "Login",
+        "Info": "Personal Information",
+        "Rank": "View Points",
+        "Order": "Order History",
+        "Notifications": "Auto Notifications",
+        "Export": "Become an Export",
+        "LogOut": "Log Out",
     },
     Home: {
         "Live": "Live",
@@ -45,6 +51,14 @@ const Enus: IDict<IDict<string>> = {
         "About": "About",
         "Us": "Us",
     },
+    User: {
+        "Info": "personal information",
+        "Order": "Order information",
+        "BuyRecord": "purchase record",
+        "StoreRecord": "Stored value record",
+        "ChangeUserName": "change name",
+        "ChangePassword": "change password",
+    }
 }
 
 export default Enus

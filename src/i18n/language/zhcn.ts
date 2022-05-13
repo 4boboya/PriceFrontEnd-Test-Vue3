@@ -9,6 +9,12 @@ const Zhcn: IDict<IDict<string>> = {
         "Customer": "客户服务",
         "Language": "语系",
         "Login": "登入",
+        "Info": "个人资料",
+        "Rank": "查看积分",
+        "Order": "订单历史",
+        "Notifications": "自动通知",
+        "Export": "成为专家",
+        "LogOut": "登出",
     },
     Home: {
         "Live": "实况",
@@ -45,6 +51,14 @@ const Zhcn: IDict<IDict<string>> = {
         "About": "关于",
         "Us": "我们",
     },
+    User: {
+        "Info": "个人资料",
+        "Order": "订单资讯",
+        "BuyRecord": "购买纪录",
+        "StoreRecord": "储值纪录",
+        "ChangeUserName": "变更名称",
+        "ChangePassword": "变更密码",
+    }
 }
 
 export default Zhcn

@@ -66,11 +66,11 @@
   height: 90px;
   min-width: 300px;
   border-radius: 5px;
-  border-left: 2px solid #618730;
-  color: #dedede;
-  background-color: #343444;
+  border-left: 2px solid var(--minor-border);
+  color: var(--main-font);
+  background-color: var(--bg-card);
   padding: 2.5px 15px;
-  box-shadow: 1.5px 1.5px 4px #ffffff45;
+  box-shadow: 1.5px 1.5px 4px var(--main-shadow);
   font-size: 13px;
 
   & > div {

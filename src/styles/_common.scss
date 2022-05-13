@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 
 html {
     overflow-x: hidden;
@@ -6,8 +6,30 @@ html {
 
 body {
     margin: unset;
-    background-color: #0f1110;
+    background-color: var(--bg-color);
     font-family: "Noto Sans TC", sans-serif;
+}
+
+:root {
+    --bg-color: #0f1110;
+    --seven-bg-color: #0f111070;
+    --five-bg-color: #0f111050;
+    --bg-card: #343444;
+    --backdrop: #30363399;
+    --main-color: #618730;
+    --minor-color: #7e0234;
+    --third-color: #232323;
+    --main-font: #dedede;
+    --minor-font: #618730;
+    --third-font: #0f1110;
+    --op-main-border: #c4c4c430;
+    --minor-border: #618730;
+    --third-border: #0f1110;
+    --input-border: #7e0234;
+    --white-border: #c0c0c0;
+    --input-focus-border: #618730;
+    --main-shadow: #ffffff45;
+    --non-img: #c4c4c4;
 }
 
 @mixin mixin-pc {

@@ -17,14 +17,14 @@
 @import "@/styles/_common.scss";
 .footer {
   height: 104px;
-  border-top: 1px solid #c4c4c430;
-  color: #dedede;
-  margin-top: 20px;
+  width: 100%;
+  border-top: 1px solid var(--op-main-border);
+  color: var(--main-font);
+  // margin-top: 20px;
 }
 
 @include mixin-phone {
   .footer {
-    width: calc(100vw - 30px);
     font-size: 8px;
   }
   .type {
@@ -34,11 +34,7 @@
     display: none;
   }
 }
-@include mixin-pc {
-  .footer {
-    width: calc(100vw - 230px);
-  }
-}
+
 .type {
   display: flex;
   justify-content: space-between;

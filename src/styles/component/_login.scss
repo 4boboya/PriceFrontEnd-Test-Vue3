@@ -15,7 +15,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #30363399;
+    background-color: var(--backdrop);
     backdrop-filter: blur(7px);
 }
 
@@ -35,13 +35,13 @@
     z-index: 2;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    background-color: #0f1110;
+    background-color: var(--bg-color);
     padding: 0px 40px 30px;
-    box-shadow: 1.5px 1.5px 15px #ffffff45;
+    box-shadow: 1.5px 1.5px 15px var(--main-shadow);
 
     h1 {
         text-align: center;
-        color: #dedede;
+        color: var(--main-font);
     }
 }
 
@@ -58,7 +58,7 @@
     & span {
         font-size: 12px;
         margin-inline: 10px;
-        color: #dedede;
+        color: var(--main-font);
         cursor: pointer;
     }
 }
@@ -69,15 +69,15 @@ input {
     border-radius: 25px;
     outline: unset;
     padding: 2px 10px;
-    border: 2px solid #7e0234;
+    border: 2px solid var(--input-border);
     background-color: transparent;
-    color: #dedede;
+    color: var(--main-font);
     transition: all 0.3s ease-in-out;
     text-align: center;
 }
 
 input:focus {
-    border-color: #5f842f;
+    border-color: var(--input-focus-border);
 }
 
 .login-button,
@@ -85,17 +85,17 @@ input:focus {
     height: 30px;
     padding: 2px 10px;
     border-radius: 25px;
-    border: 2px solid #7e0234;
+    border: 2px solid var(--input-border);
     background-color: transparent;
-    color: #dedede;
+    color: var(--main-font);
     cursor: pointer;
     transition: all 0.15s ease-in-out;
 }
 
 .login-button:hover,
 .register-button:hover {
-    border-color: #5f842f;
-    background-color: #5f842f;
+    border-color: var(--input-focus-border);
+    background-color: var(--input-focus-border);
 }
 
 .third-login {

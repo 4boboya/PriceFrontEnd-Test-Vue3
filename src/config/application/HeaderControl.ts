@@ -28,5 +28,13 @@ export const HeaderControl: IHeaderControl = {
         "Tiếng Việt": "vi-VN",
         "ยาสึฟุมิ": "th-TH",
     }
-    
 }
+
+export const UserControl = [
+    { name: "Header.Info", link: "/user", key: "Info" },
+    { name: "Header.Rank", link: "", key: "Rank" },
+    { name: "Header.Order", link: "", key: "Order" },
+    { name: "Header.Notifications", link: "", key: "Notifications" },
+    { name: "Header.Export", link: "", key: "Export" },
+    { name: "Header.LogOut", link: "LogOut", key: "LogOut" },
+]

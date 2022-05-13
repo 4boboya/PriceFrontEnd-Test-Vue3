@@ -9,6 +9,12 @@ const Vivn: IDict<IDict<string>> = {
         "Customer": "Dịch vụ khách hàng",
         "Language": "Ngôn ngữ",
         "Login": "đăng nhập",
+        "Info": "thông tin cá nhân",
+        "Rank": "Xem điểm",
+        "Order": "Lịch sử đơn hàng",
+        "Notifications": "thông báo tự động",
+        "Export": "trở thành một chuyên gia",
+        "LogOut": "Đăng xuất",
     },
     Home: {
         "Live": "sống",
@@ -45,6 +51,14 @@ const Vivn: IDict<IDict<string>> = {
         "About": "Về",
         "Us": "chúng ta",
     },
+    User: {
+        "Info": "thông tin cá nhân",
+        "Order": "Thông tin đặt hàng",
+        "BuyRecord": "hồ sơ mua hàng",
+        "StoreRecord": "Bản ghi giá trị được lưu trữ",
+        "ChangeUserName": "đổi tên",
+        "ChangePassword": "đổi mật khẩu",
+    }
 }
 
 export default Vivn

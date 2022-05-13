@@ -23,15 +23,18 @@
 }
 .header {
   height: 59px;
-  background-color: #0f111070;
-  color: #dedede;
+  background-color: var(--seven-bg-color);
+  color: var(--main-font);
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #c4c4c430;
+  border-bottom: 1px solid var(--op-main-border);
   backdrop-filter: blur(7px);
 }
 .title {
-  color: #618730;
+  color: var(--minor-font);
+  & > h2 {
+    cursor: pointer;
+  }
 }
 .control {
   display: flex;
@@ -52,15 +55,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #30363399;
+  background-color: var(--backdrop);
   backdrop-filter: blur(7px);
-  color: #dedede;
+  color: var(--main-font);
   overflow: hidden;
   height: 175px;
   z-index: 1;
 
   .control-content {
-    background-color: #0f111050;
+    background-color: var(--five-bg-color);
     display: grid;
     grid-template-columns: repeat(3, minmax(max-content, 100px));
     justify-content: center;
@@ -93,15 +96,15 @@
   width: 250px;
   display: flex;
   justify-content: center;
-  background-color: #30363399;
+  background-color: var(--backdrop);
   backdrop-filter: blur(7px);
-  color: #dedede;
+  color: var(--main-font);
   overflow: hidden;
-  height: 175px;
+  height: 240px;
   z-index: 1;
 
   .control-content {
-    background-color: #0f111050;
+    background-color: var(--five-bg-color);
     width: 95%;
     justify-content: center;
     padding-block: 5px;
