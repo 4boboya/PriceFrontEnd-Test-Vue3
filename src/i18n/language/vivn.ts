@@ -37,6 +37,14 @@ const Vivn: IDict<IDict<string>> = {
         "Submit": "gửi",
         "NotSame": "Mật khẩu không khớp với mật khẩu xác nhận",
     },
+    Footer: {
+        "Help": "Giúp đỡ",
+        "Feeback": "Bồi hoàn",
+        "Promotions": "Khuyến mại",
+        "Policy": "Chính sách & Thỏa thuận",
+        "About": "Về",
+        "Us": "chúng ta",
+    },
 }
 
 export default Vivn

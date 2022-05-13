@@ -37,6 +37,14 @@ const Jajp: IDict<IDict<string>> = {
         "Submit": "送信",
         "NotSame": "パスワードが確認パスワードと一致しません",
     },
+    Footer: {
+        "Help": "ヘルプ",
+        "Feeback": "フィードバック",
+        "Promotions": "プロモーション",
+        "Policy": "ポリシーと契約",
+        "About": "約",
+        "Us": "我ら",
+    },
 }
 
 export default Jajp

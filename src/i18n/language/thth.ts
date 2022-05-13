@@ -37,6 +37,14 @@ const Thth: IDict<IDict<string>> = {
         "Submit": "ส่ง",
         "NotSame": "รหัสผ่านไม่ตรงกับรหัสผ่านยืนยัน",
     },
+    Footer: {
+        "Help": "ช่วย",
+        "Feeback": "คืนเงิน",
+        "Promotions": "โปรโมชั่น",
+        "Policy": "นโยบายและข้อตกลง",
+        "About": "เกี่ยวกับ",
+        "Us": "เรา",
+    },
 }
 
 export default Thth

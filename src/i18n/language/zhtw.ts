@@ -37,6 +37,14 @@ const Zhtw: IDict<IDict<string>> = {
         "Submit": "送出",
         "NotSame": "密碼與確認密碼不一致",
     },
+    Footer: {
+        "Help": "幫助",
+        "Feeback": "回饋",
+        "Promotions": "促銷活動",
+        "Policy": "政策與協議",
+        "About": "關於",
+        "Us": "我們",
+    },
 }
 
 export default Zhtw

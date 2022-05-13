@@ -37,6 +37,14 @@ const Enus: IDict<IDict<string>> = {
         "Submit": "Submit",
         "NotSame": "Password not same",
     },
+    Footer: {
+        "Help": "Help",
+        "Feeback": "Feeback",
+        "Promotions": "Promotions",
+        "Policy": "Policy & Agreement",
+        "About": "About",
+        "Us": "Us",
+    },
 }
 
 export default Enus

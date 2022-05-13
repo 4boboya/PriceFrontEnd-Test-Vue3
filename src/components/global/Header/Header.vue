@@ -111,7 +111,6 @@ export default defineComponent({
     }
 
     const clickSubItem = (event: string) => {
-      console.log(event)
       switch (currentControl.value) {
         case "Language":
           locale.value = event;

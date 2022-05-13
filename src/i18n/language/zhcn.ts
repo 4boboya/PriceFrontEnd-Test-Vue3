@@ -37,6 +37,14 @@ const Zhcn: IDict<IDict<string>> = {
         "Submit": "送出",
         "NotSame": "密码与确认密码不一致",
     },
+    Footer: {
+        "Help": "帮助",
+        "Feeback": "回馈",
+        "Promotions": "促销活动",
+        "Policy": "政策与协议",
+        "About": "关于",
+        "Us": "我们",
+    },
 }
 
 export default Zhcn
