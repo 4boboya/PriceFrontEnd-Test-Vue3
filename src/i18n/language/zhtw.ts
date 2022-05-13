@@ -23,6 +23,20 @@ const Zhtw: IDict<IDict<string>> = {
         "Ice Hockey": "冰球",
         "Tennis": "網球",
     },
+    Login: {
+        "Login": "登入",
+        "Register": "註冊",
+        "Forget": "忘記密碼",
+        "Account": "帳號",
+        "Password": "密碼",
+        "UserName": "使用者名稱",
+        "Mail": "電子信箱",
+        "Check": "確認密碼",
+        "Have": "已擁有帳號",
+        "Sign": "前往登入",
+        "Submit": "送出",
+        "NotSame": "密碼與確認密碼不一致",
+    },
 }
 
 export default Zhtw

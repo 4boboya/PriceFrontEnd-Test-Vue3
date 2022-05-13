@@ -1,20 +1,20 @@
 <template>
   <div class="card">
-    <h1>Forget Password</h1>
+    <h1>{{ t("Login.Forget") }}</h1>
     <section>
       <div class="input-div">
-        <input type="text" placeholder="E-mail" />
+        <input type="text" :placeholder="t('Login.Mail')" />
       </div>
       <div class="button-div">
         <div/>
-        <button class="register-button">Submit</button>
+        <button class="register-button">{{ t("Login.Submit") }}</button>
       </div>
     </section>
     <hr />
     <section>
       <div class="have-account">
-        <span>Have an Account?</span>
-        <span @click="login()"> Sign In</span>
+        <span>{{ t("Login.Have") }}? </span>
+        <span @click="login()"> {{ t("Login.Sign") }}</span>
       </div>
     </section>
   </div>
@@ -39,15 +39,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from "vuex"
+import { useI18n } from "vue-i18n";
 export default defineComponent({
   setup() {
     const store = useStore()
+    const { t } = useI18n()
 
     const login = () => {
       store.dispatch("Component/SetSingin", {status: true, component: "Login"})
     }
 
-    return { login }
+    return { login, t }
   }
 })
 </script>

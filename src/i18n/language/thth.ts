@@ -23,6 +23,20 @@ const Thth: IDict<IDict<string>> = {
         "Ice Hockey": "ฮอคกี้น้ำแข็ง",
         "Tennis": "เทนนิส",
     },
+    Login: {
+        "Login": "เข้าสู่ระบบ",
+        "Register": "ลงทะเบียน",
+        "Forget": "ลืมรหัสผ่าน",
+        "Account": "หมายเลขบัญชี",
+        "Password": "รหัสผ่าน",
+        "UserName": "ชื่อผู้ใช้",
+        "Mail": "อีเมล",
+        "Check": "ยืนยันรหัสผ่าน",
+        "Have": "มีบัญชีอยู่แล้ว",
+        "Sign": "เข้าระบบ",
+        "Submit": "ส่ง",
+        "NotSame": "รหัสผ่านไม่ตรงกับรหัสผ่านยืนยัน",
+    },
 }
 
 export default Thth

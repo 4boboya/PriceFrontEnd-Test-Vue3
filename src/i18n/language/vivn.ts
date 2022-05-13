@@ -23,6 +23,20 @@ const Vivn: IDict<IDict<string>> = {
         "Ice Hockey": "Khúc côn cầu trên băng",
         "Tennis": "Quần vợt",
     },
+    Login: {
+        "Login": "đăng nhập",
+        "Register": "Đăng ký",
+        "Forget": "Quên mật khẩu",
+        "Account": "số tài khoản",
+        "Password": "mật khẩu mở khóa",
+        "UserName": "tên tài khoản",
+        "Mail": "e-mail",
+        "Check": "Xác nhận mật khẩu",
+        "Have": "Bạn co săn san để tạo một tai khoản",
+        "Sign": "đi đăng nhập",
+        "Submit": "gửi",
+        "NotSame": "Mật khẩu không khớp với mật khẩu xác nhận",
+    },
 }
 
 export default Vivn

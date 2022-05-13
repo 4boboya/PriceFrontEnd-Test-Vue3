@@ -23,6 +23,20 @@ const Zhcn: IDict<IDict<string>> = {
         "Ice Hockey": "冰球",
         "Tennis": "网球",
     },
+    Login: {
+        "Login": "登入",
+        "Register": "注册",
+        "Forget": "忘记密码",
+        "Account": "帐号",
+        "Password": "密码",
+        "UserName": "使用者名称",
+        "Mail": "电子信箱",
+        "Check": "确认密码",
+        "Have": "已拥有帐号",
+        "Sign": "前往登入",
+        "Submit": "送出",
+        "NotSame": "密码与确认密码不一致",
+    },
 }
 
 export default Zhcn

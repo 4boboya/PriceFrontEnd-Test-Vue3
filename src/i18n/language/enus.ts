@@ -23,6 +23,20 @@ const Enus: IDict<IDict<string>> = {
         "Ice Hockey": "Ice Hockey",
         "Tennis": "Tennis",
     },
+    Login: {
+        "Login": "Login",
+        "Register": "Register",
+        "Forget": "Forget Password",
+        "Account": "Account",
+        "Password": "Password",
+        "UserName": "UserName",
+        "Mail": "E-Mail",
+        "Check": "Check Password",
+        "Have": "Have an Account",
+        "Sign": "Sign In",
+        "Submit": "Submit",
+        "NotSame": "Password not same",
+    },
 }
 
 export default Enus

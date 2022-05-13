@@ -23,6 +23,20 @@ const Jajp: IDict<IDict<string>> = {
         "Ice Hockey": "アイスホッケー",
         "Tennis": "テニス",
     },
+    Login: {
+        "Login": "ログインする",
+        "Register": "登録",
+        "Forget": "パスワードをお忘れですか",
+        "Account": "口座番号",
+        "Password": "パスワード",
+        "UserName": "ユーザー名",
+        "Mail": "Eメール",
+        "Check": "パスワードを認証する",
+        "Have": "すでにアカウントをお持ちですか",
+        "Sign": "ログインに移動",
+        "Submit": "送信",
+        "NotSame": "パスワードが確認パスワードと一致しません",
+    },
 }
 
 export default Jajp

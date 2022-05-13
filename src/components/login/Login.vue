@@ -1,23 +1,19 @@
 <template>
   <div class="card">
-    <h1>Login</h1>
+    <h1>{{ t("Login.Login") }}</h1>
     <section>
       <div class="input-div">
-        <input type="text" placeholder="Account" v-model="loginData.account" />
+        <input type="text" :placeholder="t('Login.Mail')" v-model="loginData.account" />
       </div>
       <div class="input-div">
-        <input
-          type="password"
-          placeholder="Password"
-          v-model="loginData.password"
-        />
+        <input type="password" :placeholder="t('Login.Password')" v-model="loginData.password" />
       </div>
       <div class="button-div">
         <div>
-          <span @click="register()">Register</span>
-          <span @click="forget()">Forget Password?</span>
+          <span @click="register()">{{ t("Login.Register") }}</span>
+          <span @click="forget()">{{ t("Login.Forget") }}?</span>
         </div>
-        <button class="login-button" @click="login()">Login</button>
+        <button class="login-button" @click="login()">{{ t("Login.Login") }}</button>
       </div>
     </section>
     <hr />
@@ -38,11 +34,13 @@
 <script lang="ts">
 import { defineComponent, reactive, computed } from "vue";
 import { useStore } from "vuex"
+import { useI18n } from "vue-i18n";
 import { Login } from "@/api/user"
 import { ILoginData } from "@/type/Login"
 export default defineComponent({
   setup() {
     const store = useStore()
+    const { t } = useI18n()
     const finger = computed(() => store.getters["User/GetFinger"])
     let loginData = reactive({} as ILoginData)
 
@@ -64,7 +62,7 @@ export default defineComponent({
         }
       })
     }
-    return { loginData, register, forget, login };
+    return { t, loginData, register, forget, login };
   },
 });
 </script>

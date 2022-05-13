@@ -1,47 +1,31 @@
 <template>
   <div class="card">
-    <h1>Register</h1>
+    <h1>{{ t("Login.Register") }}</h1>
     <section>
       <div class="input-div">
-        <input
-          type="text"
-          placeholder="UserName"
-          v-model="registerData.username"
-        />
+        <input type="text" :placeholder="t('Login.UserName')" v-model="registerData.username" />
       </div>
       <div class="input-div">
-        <input
-          type="text"
-          placeholder="E-mail"
-          v-model="registerData.email"
-        />
+        <input type="text" :placeholder="t('Login.Mail')" v-model="registerData.email" />
       </div>
       <div class="input-div">
-        <input
-          type="password"
-          placeholder="Password"
-          v-model="registerData.pwd"
-        />
+        <input type="password" :placeholder="t('Login.Password')" v-model="registerData.pwd" />
       </div>
       <div class="input-div">
-        <input
-          type="password"
-          placeholder="Check Password"
-          v-model="registerData.checkPwd"
-        />
+        <input type="password" :placeholder="t('Login.Check')" v-model="registerData.checkPwd" />
       </div>
       <div class="button-div">
         <div>
-          <span v-show="registerData.pwdError">Password not same</span>
+          <span v-show="registerData.pwdError">{{ t("Login.NotSame") }}</span>
         </div>
-        <button class="register-button">Register</button>
+        <button class="register-button">{{ t("Login.Register") }}</button>
       </div>
     </section>
     <hr />
     <section>
       <div class="have-account">
-        <span>Have an Account?</span>
-        <span @click="login()"> Sign In</span>
+        <span>{{ t("Login.Have") }}? </span>
+        <span @click="login()"> {{ t("Login.Sign") }}</span>
       </div>
     </section>
   </div>
@@ -66,10 +50,12 @@
 <script lang="ts">
 import { defineComponent, reactive, watch } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { IRegisterData } from "@/type/Login";
 export default defineComponent({
   setup() {
     const store = useStore();
+    const { t } = useI18n()
     let registerData = reactive({} as IRegisterData);
 
     const login = () => {
@@ -84,7 +70,7 @@ export default defineComponent({
       registerData.pwdError = checkPWD();
     });
 
-    return { registerData, login };
+    return { t, registerData, login };
   },
 });
 </script>
