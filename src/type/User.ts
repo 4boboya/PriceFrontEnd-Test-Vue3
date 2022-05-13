@@ -13,3 +13,16 @@ export interface IRegisterData {
     checkPwd: string,
     pwdError: boolean,
 }
+
+export interface IUpdateNameData {
+    username: string,
+    finger: string,
+    token: string,
+}
+
+export interface IUpdatePassword {
+    password: string,
+    newPassword: string,
+    token: string,
+    finger: string,
+}

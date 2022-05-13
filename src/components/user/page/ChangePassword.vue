@@ -2,21 +2,21 @@
   <div class="change-content">
     <fieldset>
       <legend>{{ t("User.OldPassword") }}</legend>
-      <input type="password" v-model="oldPassword">
+        <input type="password" v-model="oldPassword" autocomplete="false">
       <div />
     </fieldset>
     <fieldset>
       <legend>{{ t("User.NewPassword") }}</legend>
-      <input type="password" v-model="newPassword">
+        <input type="password" v-model="newPassword" autocomplete="false">
       <div />
     </fieldset>
     <fieldset>
       <legend>{{ t("User.CheckPassword") }}</legend>
-      <input type="password" v-model="checkPassword">
+        <input type="password" v-model="checkPassword" autocomplete="false">
       <div />
     </fieldset>
     <div class="submit-div">
-      <button>{{ t("User.Submit") }}</button>
+      <button @click="submit">{{ t("User.Submit") }}</button>
     </div>
   </div>
 </template>
@@ -83,16 +83,52 @@ fieldset {
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useStore } from "vuex"
+import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
+import { UpdatePassword } from "@/api/user"
+import { IUserInfo } from "@/type/Vuex"
+import { IUpdatePassword } from "@/type/User"
+import Logout from '@/library/global/Logout'
 
 export default defineComponent({
   setup() {
     const { t } = useI18n()
+    const store = useStore()
+    const router = useRouter()
     const oldPassword = ref<string>("")
     const newPassword = ref<string>("")
     const checkPassword = ref<string>("")
 
-    return { t, oldPassword, newPassword, checkPassword }
+    const submit = async () => {
+      if (newPassword.value != checkPassword.value) {
+        console.log("password not same")
+        return
+      }
+      const userInfo: IUserInfo = store.getters['User/GetUserInfo'] as IUserInfo
+      const finger: string = store.getters['User/GetFinger'] as string
+      const updateData: IUpdatePassword = {
+        password: oldPassword.value,
+        newPassword: checkPassword.value,
+        finger: finger,
+        token: userInfo.Token
+      }
+      await UpdatePassword(updateData).then((res) => {
+        const response = res.response
+        const request = res?.request
+        if (!response && !request) {
+          console.log(res)
+          if (res.code == 10310) {
+            console.log("修改成功")
+            Logout()
+            router.push("/")
+          }
+          else console.log("修改失敗", res.message)
+        } else console.log("修改失敗", res.response, res.request)
+      })
+    }
+
+    return { t, oldPassword, newPassword, checkPassword, submit }
   },
 })
 </script>

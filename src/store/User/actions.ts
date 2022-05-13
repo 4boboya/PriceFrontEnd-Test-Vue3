@@ -40,9 +40,11 @@ export const actions: ActionTree<TState, TState> & TActions = {
     },
     [ActionType.SetUserInfo]({ commit }, userInfo) {
         commit(MutauionType.SetUserInfo, userInfo)
+        Cookies.set('user', JSON.stringify(userInfo))
     },
     [ActionType.SetWallet]({ commit }, wallet) {
         commit(MutauionType.SetWallet, wallet)
+        Cookies.set('wallet', JSON.stringify(wallet))
     },
     [ActionType.SetUser]({ commit }, user) {
         const userInfo = {

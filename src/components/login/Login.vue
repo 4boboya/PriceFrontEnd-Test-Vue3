@@ -36,7 +36,7 @@ import { defineComponent, reactive, computed } from "vue";
 import { useStore } from "vuex"
 import { useI18n } from "vue-i18n";
 import { Login } from "@/api/user"
-import { ILoginData } from "@/type/Login"
+import { ILoginData } from "@/type/User"
 export default defineComponent({
   setup() {
     const store = useStore()

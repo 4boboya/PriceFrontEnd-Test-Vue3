@@ -102,7 +102,7 @@
 <script lang="ts">
 import { defineComponent, computed, watch } from 'vue'
 import { useStore } from 'vuex'
-import Logout from '@/library/global/Logut'
+import Logout from '@/library/global/Logout'
 export default defineComponent({
   setup() {
     const store = useStore();

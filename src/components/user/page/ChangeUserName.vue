@@ -6,7 +6,7 @@
       <div />
     </fieldset>
     <div class="submit-div">
-      <button>{{ t("User.Submit") }}</button>
+      <button @click="submit">{{ t("User.Submit") }}</button>
     </div>
   </div>
 </template>
@@ -75,7 +75,9 @@ fieldset {
 import { defineComponent, ref } from 'vue'
 import { useStore } from "vuex"
 import { useI18n } from "vue-i18n";
+import { UpdateUserName } from "@/api/user"
 import { IUserInfo } from "@/type/Vuex"
+import { IUpdateNameData } from '@/type/User'
 
 export default defineComponent({
   setup() {
@@ -88,9 +90,31 @@ export default defineComponent({
       userName.value = userInfo.Name
     }
 
+    const submit = async () => {
+      const userInfo: IUserInfo = store.getters['User/GetUserInfo'] as IUserInfo
+      const finger: string = store.getters['User/GetFinger'] as string
+      const updateData: IUpdateNameData = {
+        username: userName.value,
+        finger: finger,
+        token: userInfo.Token
+      }
+      await UpdateUserName(updateData).then((res) => {
+        const response = res.response
+        const request = res?.request
+        if (!response && !request) {
+          if (res.code == 10400) {
+            console.log("修改成功")
+            userInfo.Name = userName.value
+            store.dispatch("User/SetUserInfo", userInfo);
+          }
+          else console.log("修改失敗", res.message)
+        } else console.log("修改失敗", res.response, res.request)
+      })
+    }
+
     serDefault()
 
-    return { t, userName }
+    return { t, userName, submit }
   },
 })
 </script>

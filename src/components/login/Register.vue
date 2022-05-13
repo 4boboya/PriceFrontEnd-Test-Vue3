@@ -51,7 +51,7 @@
 import { defineComponent, reactive, watch } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import { IRegisterData } from "@/type/Login";
+import { IRegisterData } from "@/type/User";
 export default defineComponent({
   setup() {
     const store = useStore();

@@ -67,7 +67,7 @@ import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n";
 import { HeaderControl, UserControl } from "@/config/application/HeaderControl";
 import mitt from "@/library/global/Mitt"
-import Logout from '@/library/global/Logut'
+import Logout from '@/library/global/Logout'
 export default defineComponent({
   setup() {
     const store = useStore()

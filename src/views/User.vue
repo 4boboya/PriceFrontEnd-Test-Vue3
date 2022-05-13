@@ -49,12 +49,16 @@ export default defineComponent({
     const query = computed(() => { return route.query })
     const nowPage = ref<string>("profile")
 
+    const setNowPage = () => {
+      if (query.value.page) nowPage.value = query.value.page as string
+      else nowPage.value = 'profile'
+    }
+
+    setNowPage()
+
     watch(
       () => { query.value },
-      () => {
-        if (query.value.page) nowPage.value = query.value.page as string
-        else nowPage.value = 'profile'
-      },
+      () => setNowPage(),
       { deep: true }
     )
 

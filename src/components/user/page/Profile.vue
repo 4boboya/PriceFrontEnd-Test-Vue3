@@ -25,11 +25,6 @@ export default defineComponent({
   setup() {
     const page = ref<string>("username")
 
-    watch(
-      () => { return page.value },
-      () => { console.log(page.value); }
-    )
-
     return { page }
   }
 })
