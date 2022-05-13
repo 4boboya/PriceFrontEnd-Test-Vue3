@@ -3,6 +3,7 @@ import Footer from "./global/Footer/Footer.vue"
 import Chat from "./global/Chat/Chat.vue"
 import SideBar from "./global/SideBar/SideBar.vue"
 import Table from "./global/Table/Table.vue"
+import Hint from "./global/Hint/Hint.vue"
 
 import HotGame from "./hotGame/HotGame.vue"
 import ISingin from "./login/index.vue"
@@ -15,4 +16,5 @@ export default {
     ISingin,
     SideBar,
     Table,
+    Hint,
 }

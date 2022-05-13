@@ -15,6 +15,7 @@ body {
     --seven-bg-color: #0f111070;
     --five-bg-color: #0f111050;
     --bg-card: #343444;
+    --minor-bg-card: #ababab;
     --backdrop: #30363399;
     --main-color: #618730;
     --minor-color: #7e0234;
@@ -29,7 +30,13 @@ body {
     --white-border: #c0c0c0;
     --input-focus-border: #618730;
     --main-shadow: #ffffff45;
+    --minor-shadow: #0f111045;
     --non-img: #c4c4c4;
+    --dark-danger-color: #791b1b;
+    --success-color: #549f3c;
+    --hint-success: #549f3c;
+    --hint-danger: #c22424;
+    --hint-warning: #ad6010;
 }
 
 @mixin mixin-pc {

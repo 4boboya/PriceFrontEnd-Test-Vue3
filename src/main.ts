@@ -25,6 +25,7 @@ app.component('Footer', Component.Footer)
 app.component('Chat', Component.Chat)
 app.component('SideBar', Component.SideBar)
 app.component('Table', Component.Table)
+app.component('Hint', Component.Hint)
 
 Directive(app)
 

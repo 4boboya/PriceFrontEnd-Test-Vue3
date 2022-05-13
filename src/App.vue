@@ -1,5 +1,6 @@
 <template>
   <div @click="closeAll">
+    <Hint />
     <Header />
     <SideBar />
     <router-view />
