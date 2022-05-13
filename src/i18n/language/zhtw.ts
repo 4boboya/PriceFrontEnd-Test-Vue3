@@ -58,6 +58,11 @@ const Zhtw: IDict<IDict<string>> = {
         "StoreRecord": "儲值紀錄",
         "ChangeUserName": "變更名稱",
         "ChangePassword": "變更密碼",
+        "UserName": "使用者名稱",
+        "OldPassword": "舊密碼",
+        "NewPassword": "新密碼",
+        "CheckPassword": "確認密碼",
+        "Submit": "送出",
     }
 }
 

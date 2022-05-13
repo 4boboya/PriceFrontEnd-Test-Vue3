@@ -1,12 +1,12 @@
 <template>
   <div class="change-content">
     <fieldset>
-      <legend>使用者名稱</legend>
+      <legend>{{ t("User.UserName") }}</legend>
       <input type="text" v-model="userName">
       <div />
     </fieldset>
     <div class="submit-div">
-      <button>送出</button>
+      <button>{{ t("User.Submit") }}</button>
     </div>
   </div>
 </template>
@@ -74,11 +74,13 @@ fieldset {
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useStore } from "vuex"
+import { useI18n } from "vue-i18n";
 import { IUserInfo } from "@/type/Vuex"
 
 export default defineComponent({
   setup() {
     const store = useStore()
+    const { t } = useI18n()
     const userName = ref<string>("");
 
     const serDefault = () => {
@@ -88,7 +90,7 @@ export default defineComponent({
 
     serDefault()
 
-    return { userName }
+    return { t, userName }
   },
 })
 </script>

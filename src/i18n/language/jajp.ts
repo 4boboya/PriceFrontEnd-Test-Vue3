@@ -58,6 +58,11 @@ const Jajp: IDict<IDict<string>> = {
         "StoreRecord": "プリペイドレコード",
         "ChangeUserName": "名前を変更する",
         "ChangePassword": "パスワードを変更する",
+        "UserName": "ユーザー名",
+        "OldPassword": "以前のパスワード",
+        "NewPassword": "新しいパスワード",
+        "CheckPassword": "パスワードを認証する",
+        "Submit": "送信",
     }
 }
 

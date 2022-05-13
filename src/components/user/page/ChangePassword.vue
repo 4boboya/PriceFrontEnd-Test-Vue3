@@ -1,22 +1,22 @@
 <template>
   <div class="change-content">
     <fieldset>
-      <legend>舊密碼</legend>
+      <legend>{{ t("User.OldPassword") }}</legend>
       <input type="password" v-model="oldPassword">
       <div />
     </fieldset>
     <fieldset>
-      <legend>新密碼</legend>
+      <legend>{{ t("User.NewPassword") }}</legend>
       <input type="password" v-model="newPassword">
       <div />
     </fieldset>
     <fieldset>
-      <legend>確認新密碼</legend>
+      <legend>{{ t("User.CheckPassword") }}</legend>
       <input type="password" v-model="checkPassword">
       <div />
     </fieldset>
     <div class="submit-div">
-      <button>送出</button>
+      <button>{{ t("User.Submit") }}</button>
     </div>
   </div>
 </template>
@@ -83,14 +83,16 @@ fieldset {
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
     const oldPassword = ref<string>("")
     const newPassword = ref<string>("")
     const checkPassword = ref<string>("")
 
-    return { oldPassword, newPassword, checkPassword }
+    return { t, oldPassword, newPassword, checkPassword }
   },
 })
 </script>

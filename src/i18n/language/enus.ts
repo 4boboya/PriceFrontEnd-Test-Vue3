@@ -58,6 +58,11 @@ const Enus: IDict<IDict<string>> = {
         "StoreRecord": "Stored value record",
         "ChangeUserName": "change name",
         "ChangePassword": "change password",
+        "UserName": "username",
+        "OldPassword": "Old Password",
+        "NewPassword": "new password",
+        "CheckPassword": "Confirm Password",
+        "Submit": "Submit",
     }
 }
 

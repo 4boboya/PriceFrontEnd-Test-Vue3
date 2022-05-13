@@ -58,6 +58,11 @@ const Vivn: IDict<IDict<string>> = {
         "StoreRecord": "Bản ghi giá trị được lưu trữ",
         "ChangeUserName": "đổi tên",
         "ChangePassword": "đổi mật khẩu",
+        "UserName": "tên tài khoản",
+        "OldPassword": "Mật khẩu cũ",
+        "NewPassword": "mật khẩu mới",
+        "CheckPassword": "Xác nhận mật khẩu",
+        "Submit": "gửi",
     }
 }
 

@@ -58,6 +58,11 @@ const Zhcn: IDict<IDict<string>> = {
         "StoreRecord": "储值纪录",
         "ChangeUserName": "变更名称",
         "ChangePassword": "变更密码",
+        "UserName": "使用者名称",
+        "OldPassword": "旧密码",
+        "NewPassword": "新密码",
+        "CheckPassword": "确认密码",
+        "Submit": "送出",
     }
 }
 

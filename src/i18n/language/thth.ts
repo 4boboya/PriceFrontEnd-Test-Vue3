@@ -58,6 +58,11 @@ const Thth: IDict<IDict<string>> = {
         "StoreRecord": "บันทึกมูลค่าที่เก็บไว้",
         "ChangeUserName": "เปลี่ยนชื่อ",
         "ChangePassword": "เปลี่ยนรหัสผ่าน",
+        "UserName": "ชื่อผู้ใช้",
+        "OldPassword": "รหัสผ่านเก่า",
+        "NewPassword": "รหัสผ่านใหม่",
+        "CheckPassword": "ยืนยันรหัสผ่าน",
+        "Submit": "ส่ง",
     }
 }
 
