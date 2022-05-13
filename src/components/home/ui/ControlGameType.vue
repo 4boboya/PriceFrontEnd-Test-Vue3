@@ -1,11 +1,11 @@
 <template>
   <div v-show="!Memo" class="control-gametype" @click.stop="showGameTypeList = !showGameTypeList" >
-    {{ gameType }}
+    {{ t(`GameType.${gameType}`) }}
   </div>
   <transition name="gametype">
     <div v-if="showGameTypeList" class="gametype-options">
       <div v-for="(item, key) in GameTypes" :key="key" @click="changeGameType(key)" >
-        {{ item }}
+        {{ t(`GameType.${item}`) }}
       </div>
     </div>
   </transition>
@@ -33,12 +33,14 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import { GameTypes } from "@/config/global/GameType";
 import mitt from "@/library/global/Mitt"
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const { t } = useI18n()
     const Memo = computed(() => store.getters["Component/GetMemo"]);
     let showGameTypeList = ref<boolean>(false);
     let gameType = ref<string>("BasketBall");
@@ -55,7 +57,7 @@ export default defineComponent({
 
     mitt.on("close", closeAll)
 
-    return { GameTypes, Memo, showGameTypeList, gameType, changeGameType }
+    return { GameTypes, Memo, t, showGameTypeList, gameType, changeGameType }
   },
 });
 </script>

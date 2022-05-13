@@ -1,15 +1,15 @@
 <template>
   <div class="control-type">
     <template v-if="Width > 868">
-      <div :active="page == 'Live'" @click="page = 'Live'">Live</div>
+      <div :active="page == 'Live'" @click="page = 'Live'">{{ t("Home.Live") }}</div>
       <span>|</span>
       <div :active="page == 'Analysis'" @click="page = 'Analysis'">
-        Analysis & Predictions
+        {{ t("Home.Analysis") }}
       </div>
       <span>|</span>
-      <div :active="page == 'Forums'" @click="page = 'Forums'">Forums</div>
+      <div :active="page == 'Forums'" @click="page = 'Forums'">{{ t("Home.Forums") }}</div>
       <span>|</span>
-      <div :active="page == 'Results'" @click="page = 'Results'">Results</div>
+      <div :active="page == 'Results'" @click="page = 'Results'">{{ t("Home.Results") }}</div>
     </template>
     <template v-else>
       <div v-show="!Memo" class="control-type-list" @click.stop="showList = !showList">
@@ -17,9 +17,9 @@
       </div>
       <transition name="gametype">
         <div v-if="showList" class="type-options">
-          <div @click="page = 'Live'; showList = false">Live</div>
-          <div @click="page = 'Analysis'; showList = false">Analysis & Predictions</div>
-          <div @click="page = 'Results'; showList = false">Results</div>
+          <div @click="page = 'Live'; showList = false">{{ t("Home.Live") }}</div>
+          <div @click="page = 'Analysis'; showList = false">{{ t("Home.Analysis") }}</div>
+          <div @click="page = 'Results'; showList = false">{{ t("Home.Results") }}</div>
         </div>
       </transition>
     </template>
@@ -82,11 +82,13 @@
 <script lang="ts">
 import { defineComponent, computed, ref, inject } from "vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import mitt from "@/library/global/Mitt"
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const { t } = useI18n()
     const Width = computed(() => store.getters["Global/GetWidth"]);
     const Memo = computed(() => store.getters["Component/GetMemo"])
     let page = inject("page");
@@ -98,7 +100,7 @@ export default defineComponent({
 
     mitt.on("close", closeAll)
 
-    return { Width, Memo, page, showList }
+    return { Width, Memo, t, page, showList }
   },
 });
 </script>

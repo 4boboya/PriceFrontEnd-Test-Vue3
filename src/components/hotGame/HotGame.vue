@@ -14,9 +14,9 @@
       >
         <div class="hotgame-league">{{ item.League }}</div>
         <div class="hotgame-team">
-          <div :ref="`${item.GameID}`" class="hotgame-team-h">{{ item.TeamH }}</div>
+          <div :ref="`${item.GameID}`" class="hotgame-team-h" :title="item.TeamH">{{ item.TeamH }}</div>
           <div class="hotgame-score">{{ item.ScoreH }} : {{ item.ScoreA }}</div>
-          <div :ref="`${item.GameID}`" class="hotgame-team-a">{{ item.TeamA }}</div>
+          <div :ref="`${item.GameID}`" class="hotgame-team-a" :title="item.TeamA">{{ item.TeamA }}</div>
         </div>
         <div>{{ item.GameDate }} {{ item.GameTime }}</div>
         <div class="hotgame-analysis">
@@ -85,6 +85,7 @@
 
     .hotgame-score { 
       white-space: nowrap;
+      padding-inline: 7px;
     }
   }
 

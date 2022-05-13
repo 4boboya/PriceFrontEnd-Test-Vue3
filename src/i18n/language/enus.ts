@@ -9,7 +9,20 @@ const Enus: IDict<IDict<string>> = {
         "Customer": "Customer Services",
         "Language": "Language",
         "Login": "Login",
-    }
+    },
+    Home: {
+        "Live": "Live",
+        "Analysis": "Analysis & Predictions",
+        "Forums": "Forums",
+        "Results": "Results",
+    },
+    GameType: {
+        "BasketBall": "BasketBall",
+        "Soccer": "Soccer",
+        "BaseBall": "BaseBall",
+        "Ice Hockey": "Ice Hockey",
+        "Tennis": "Tennis",
+    },
 }
 
 export default Enus

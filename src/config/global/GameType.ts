@@ -4,5 +4,6 @@ export const GameTypes: IStringDict = {
     "BK": "BasketBall",
     "SC": "Soccer",
     "BS": "BaseBall",
-    "FL": "FootBall",
+    "HL": "Ice Hockey",
+    "TN": "Tennis",
 }
