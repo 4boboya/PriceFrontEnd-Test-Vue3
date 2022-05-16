@@ -43,8 +43,8 @@
       <div v-if="showUser" class="user-control" @click.stop="">
         <div class="control-content">
           <div class="wallet">
-            <div class="uesr-link"><icon :icon="['fas', 'coins']" class="fa-lg" /> {{ Wallet.Point }}</div>
-            <div class="uesr-link"><icon :icon="['fas', 'crown']" class="fa-lg" /> {{ Wallet.Subscriber }}</div>
+            <div class="uesr-link" title="儲值點數" @click="toStored"><icon :icon="['fas', 'coins']" class="fa-lg" /> {{ Wallet.Point }}</div>
+            <div class="uesr-link" title="訂閱會員"><icon :icon="['fas', 'crown']" class="fa-lg" /> {{ Wallet.Subscriber }}</div>
           </div>
           <hr />
           <div v-for="item in UserControl" :key="item.key" class="uesr-link" @click="uesrControl(item.link)">
@@ -135,6 +135,10 @@ export default defineComponent({
       router.push("/")
     }
 
+    const toStored = () => {
+      router.push("/stored")
+    }
+
     mitt.on("close", () => {closeSubControl(); controlUser(false)})
 
     watch(
@@ -147,7 +151,7 @@ export default defineComponent({
       () => { if (Width.value < 868) closeSubControl() }
     )
 
-    return { HeaderControl, UserControl, Status, User, Wallet, SideBar, t, locale, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout, clickSubItem, uesrControl, toHome };
+    return { HeaderControl, UserControl, Status, User, Wallet, SideBar, t, locale, show, showUser, currentControl, openSubControl, closeSubControl, login, controlSideBar, controlUser, logout, clickSubItem, uesrControl, toHome, toStored };
   },
 });
 </script>

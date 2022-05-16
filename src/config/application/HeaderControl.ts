@@ -31,9 +31,9 @@ export const HeaderControl: IHeaderControl = {
 }
 
 export const UserControl = [
-    { name: "Header.Info", link: "/user", key: "Info" },
+    { name: "Header.Info", link: "/user/profile", key: "Info" },
     { name: "Header.Rank", link: "", key: "Rank" },
-    { name: "Header.Order", link: "/user?page=order", key: "Order" },
+    { name: "Header.Order", link: "/user/order", key: "Order" },
     { name: "Header.Notifications", link: "", key: "Notifications" },
     { name: "Header.Export", link: "", key: "Export" },
     { name: "Header.LogOut", link: "LogOut", key: "LogOut" },

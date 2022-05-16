@@ -16,3 +16,15 @@ export const StoreRecordThead: Array<IThead> = [
     { key:"method", name: "付款方式" },
     { key:"status", name: "狀態" },
 ]
+
+export const StoredOption: Array<IThead> = [
+    { key:"radio", name: "" },
+    { key:"scheme", name: "方案內容" },
+    { key:"price", name: "價錢" },
+    { key:"endTime", name: "結束日期" },
+]
+
+export const StoredMethod: Array<IThead> = [
+    { key:"radio", name: "" },
+    { key:"scheme", name: "付費方式" },
+]

@@ -1,6 +1,9 @@
 <template>
   <div @click="closeAll">
-    <Hint />
+    <!-- <Hint /> -->
+    <template v-for="(item, index) in hint" :key="`${item.id}`">
+      <Hint :Title="item.title" :Message="item.message" :Hint="item.hint" class="hint" :style="`top: ${120 * index + 10}px`" />
+    </template>
     <Header />
     <SideBar />
     <router-view />
@@ -9,8 +12,14 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+.hint {
+  transition: all 0.2s ease;
+}
+</style>
+
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
 import mitt from "@/library/global/Mitt";
 import Finger from "@/library/global/Finger";
@@ -19,6 +28,7 @@ import Cookies from "js-cookie";
 export default defineComponent({
   setup() {
     const store = useStore();
+    const hint = computed(() => { return store.getters["Component/GetHint"] })
 
     const setWidth = () => {
       store.dispatch("Global/SetWidth", window.innerWidth);
@@ -49,7 +59,7 @@ export default defineComponent({
     setWidth();
     checkLogin();
 
-    return { closeAll };
+    return { closeAll, hint };
   },
 });
 </script>

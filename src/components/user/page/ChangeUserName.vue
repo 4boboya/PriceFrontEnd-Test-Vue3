@@ -72,12 +72,13 @@ fieldset {
 </style>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { useStore } from "vuex"
 import { useI18n } from "vue-i18n";
 import { UpdateUserName } from "@/api/user"
 import { IUserInfo } from "@/type/Vuex"
 import { IUpdateNameData } from '@/type/User'
+import { SetHint } from "@/library/global/Hint"
 
 export default defineComponent({
   setup() {
@@ -99,16 +100,17 @@ export default defineComponent({
         token: userInfo.Token
       }
       await UpdateUserName(updateData).then((res) => {
-        const response = res.response
+        const response = res?.response
         const request = res?.request
         if (!response && !request) {
           if (res.code == 10400) {
             console.log("修改成功")
+            SetHint("修改成功", "名稱修改成功", "success")
             userInfo.Name = userName.value
             store.dispatch("User/SetUserInfo", userInfo);
           }
-          else console.log("修改失敗", res.message)
-        } else console.log("修改失敗", res.response, res.request)
+          else SetHint("修改失敗", res.message, "error")
+        } else SetHint("修改失敗", "伺服器錯誤", "error")
       })
     }
 

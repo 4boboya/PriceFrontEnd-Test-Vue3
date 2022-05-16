@@ -62,8 +62,7 @@ export default defineComponent({
 
     const toPage = (page: string) => {
       router.push({
-        path: '/user',
-        query: { page }
+        path: `/user/${page}`,
       })
     }
 

@@ -90,6 +90,7 @@ import { UpdatePassword } from "@/api/user"
 import { IUserInfo } from "@/type/Vuex"
 import { IUpdatePassword } from "@/type/User"
 import Logout from '@/library/global/Logout'
+import { SetHint } from "@/library/global/Hint"
 
 export default defineComponent({
   setup() {
@@ -102,7 +103,7 @@ export default defineComponent({
 
     const submit = async () => {
       if (newPassword.value != checkPassword.value) {
-        console.log("password not same")
+        SetHint("修改失敗", "password not same", "error")
         return
       }
       const userInfo: IUserInfo = store.getters['User/GetUserInfo'] as IUserInfo
@@ -114,17 +115,16 @@ export default defineComponent({
         token: userInfo.Token
       }
       await UpdatePassword(updateData).then((res) => {
-        const response = res.response
+        const response = res?.response
         const request = res?.request
         if (!response && !request) {
-          console.log(res)
           if (res.code == 10310) {
-            console.log("修改成功")
+            SetHint("修改成功", "密碼修改成功", "success")
             Logout()
             router.push("/")
           }
-          else console.log("修改失敗", res.message)
-        } else console.log("修改失敗", res.response, res.request)
+          else SetHint("修改失敗", res.message, "error")
+        } else SetHint("修改失敗", response, "error")
       })
     }
 

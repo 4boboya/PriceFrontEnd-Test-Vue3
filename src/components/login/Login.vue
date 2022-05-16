@@ -37,6 +37,7 @@ import { useStore } from "vuex"
 import { useI18n } from "vue-i18n";
 import { Login } from "@/api/user"
 import { ILoginData } from "@/type/User"
+import { SetHint } from "@/library/global/Hint"
 export default defineComponent({
   setup() {
     const store = useStore()
@@ -53,13 +54,16 @@ export default defineComponent({
     const login = async () => {
       loginData.finger = finger.value
       await Login(loginData).then((res) => {
-        if (res?.code == 10200) {
-          store.dispatch("User/SetUser", res)
-          store.dispatch("User/SetStatus", true)
-          store.dispatch("Component/CloseSingin", false)
-        } else {
-          console.log("登入失敗")
-        }
+        const response = res?.response
+        const request = res?.request
+        if (!response && !request) {
+          if (res?.code == 10200) {
+            store.dispatch("User/SetUser", res)
+            store.dispatch("User/SetStatus", true)
+            store.dispatch("Component/CloseSingin", false)
+            SetHint("登入成功", "歡迎回來", "success")
+          } else SetHint("登入失敗", res.message, "error")
+        } else SetHint("登入失敗", response, "error")
       })
     }
     return { t, loginData, register, forget, login };

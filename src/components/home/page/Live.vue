@@ -79,7 +79,7 @@
                     <span>Tread</span>
                   </div>
                   <div class="link">
-                    <span>Analysis</span>
+                    <span @click="toAnalysis(item2.LeagueID, item2.GameDate, item2.GameID)">Analysis</span>
                   </div>
                 </div>
               </div>

@@ -1,11 +1,14 @@
 import { MutationTree } from "vuex"
 import { TState } from "./state"
+import { IHint } from "@/type/Vuex"
 
 export const enum MutauionType {
     SetSinginComponent = "SetSinginComponent",
     SetSingin = "SetSingin",
     SetMemo = "SetMemo",
     SetSideBar = "SetSideBar",
+    SetHint = "SetHint",
+    RemoveHint = "RemoveHint"
 }
 
 export type TMutations = {
@@ -13,6 +16,8 @@ export type TMutations = {
     [MutauionType.SetSingin](state: TState, status: boolean): void
     [MutauionType.SetMemo](state: TState, status: boolean): void
     [MutauionType.SetSideBar](state: TState, status: boolean): void
+    [MutauionType.SetHint](state: TState, data: IHint): void
+    [MutauionType.RemoveHint](state: TState, index: number): void
 }
 
 export const mutations: MutationTree<TState> & TMutations = {
@@ -27,5 +32,11 @@ export const mutations: MutationTree<TState> & TMutations = {
     },
     [MutauionType.SetSideBar](state, sidebar) {
         state.SideBar = sidebar
-    }
+    },
+    [MutauionType.SetHint](state, data) {
+        state.Hint.push(data)
+    },
+    [MutauionType.RemoveHint](state, index) {
+        state.Hint.splice(index, 1)
+    },
 }

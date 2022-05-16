@@ -1,8 +1,7 @@
 <template>
   <div class="content">
     <UserSidebar :Page="nowPage" />
-    <Profile v-if="nowPage == 'profile'" />
-    <Order v-else-if="nowPage == 'order'" />
+    <router-view />
   </div>
 </template>
 
@@ -41,23 +40,21 @@ import { useRoute } from "vue-router"
 export default defineComponent({
   components: {
     UserSidebar: defineAsyncComponent(() => import("@/components/user/ui/Sidebar.vue")),
-    Profile: defineAsyncComponent(() => import("@/components/user/page/Profile.vue")),
-    Order: defineAsyncComponent(() => import("@/components/user/page/Order.vue")),
   },
   setup() {
     const route = useRoute()
-    const query = computed(() => { return route.query })
+    const name = computed(() => { return route.name })
     const nowPage = ref<string>("profile")
 
     const setNowPage = () => {
-      if (query.value.page) nowPage.value = query.value.page as string
+      if (name.value) nowPage.value = name.value as string
       else nowPage.value = 'profile'
     }
 
     setNowPage()
 
     watch(
-      () => { query.value },
+      () => { name.value },
       () => setNowPage(),
       { deep: true }
     )

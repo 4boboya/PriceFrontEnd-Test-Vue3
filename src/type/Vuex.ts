@@ -38,3 +38,10 @@ export interface IInputWallet {
 export interface IInputUser extends IInputUserInfo {
     wallet: IInputWallet
 }
+
+export interface IHint {
+    id?: string
+    title: string
+    message: string
+    hint: "warning" | "success" | "error"
+}
